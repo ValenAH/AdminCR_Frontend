@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-around align-items-center">
+  <app-searchbar></app-searchbar>
+  <app-create-product (product)="loadProduct($event)" class=""></app-create-product>
+</div>
+
+<section>
+  <div class="row">
+    <div class="col">
+      <table class="table rounded mt-2">
+        <thead>
+          <tr>
+            <th scope="col">PRODUCTO</th>
+            <th scope="col">DESCRIPCIÓN</th>
+            <th scope="col">COSTO</th>
+            <th scope="col">PRECIO</th>
+            <th scope="col">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; index as i" class="product">
+            <td class="product__productName ms-2">{{product.productName}}</td>
+            <td class="product__productDescription ms-2">{{product.description}}</td>
+            <td class="product__productCost ms-2">{{product.unitCost}}</td>
+            <td class="product__productPrice ms-2">{{product.price}}</td>
+            <td>
+              <button class="btn-delete  p-0" (click)="deleteProduct(i)">
+                <img src="../assets/general/edit.svg" alt="">
+              </button>
+              <button class="btn-delete  p-0" (click)="deleteProduct(i)">
+                <img src="../assets/general/trash.svg" alt="">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

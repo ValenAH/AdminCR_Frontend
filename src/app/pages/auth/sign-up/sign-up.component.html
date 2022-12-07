@@ -1,0 +1,23 @@
+<section class="login-section h-100">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-12">
+        <img class="login-section__logoCR" src=".../../../../assets/imagesCR/logoCorona.png" height="200" alt="Logo Colchones de Reyes">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 text-center mb-5">
+        <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="login-section__loginForm m-4 mb-5 pb-4 d-flex justify-content-around flex-column">
+          <div class="login-section__title-cont">
+            <h1 class="login-section__title m-4 text-uppercase">INICIAR SESIÓN</h1>
+          </div>
+          <input formControlName="userName" autocomplete="false"
+          class="mx-auto my-2 p-2 text-center" type="userName" placeholder="Escribe tu usuario">
+          <input formControlName="password" autocomplete="false"
+          class="mx-auto my-2 p-2 text-center" type="password" placeholder="Escribe tu contraseña">
+          <button class="login-section__btnLogin m-2 p-2 mx-auto text-decoration-none" type="submit" value="Send">INGRESAR</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

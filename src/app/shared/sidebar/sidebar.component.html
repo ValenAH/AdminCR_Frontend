@@ -1,0 +1,14 @@
+<nav class="nav-sidebar position-relative">
+  <!-- <div class="sidebar-button p-2 rounded-circle text-center">
+    <i class="sidebar-button__barsMenu fa-solid fa-bars"></i>
+  </div> -->
+  <div class="d-flex flex-column justify-content-center" *ngFor="let item of list">
+    <a class="link rounded text-decoration-none d-flex p-2" [routerLink]="item.path">
+      <!-- <div>
+        <i class="{{item.icon}} mx-2 text-center"></i>
+      </div> -->
+      {{item.name}}
+      </a>
+  </div>
+
+</nav>

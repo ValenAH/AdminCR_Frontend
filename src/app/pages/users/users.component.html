@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-around align-items-center">
+  <app-searchbar></app-searchbar>
+  <app-create-user></app-create-user>
+</div>
+
+<section>
+  <div class="row">
+    <div class="col">
+      <table class="table rounded mt-2">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">USUARIO</th>
+            <th scope="col">CONTRASEÑA</th>
+            <th scope="col">ROL</th>
+            <th scope="col">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; index as i" class="user">
+            <td class="user__userName ms-2">{{user.userId}}</td>
+            <td class="user__userName ms-2">{{user.userName}}</td>
+            <td class="user__userDescription ms-2">{{user.password}}</td>
+            <td class="user__userCost ms-2">{{user.rolId}}</td>
+            <td>
+              <button class="btn-action  p-0">
+                <img src="../assets/general/edit.svg" alt="">
+              </button>
+              <button class="btn-action  p-0">
+                <img src="../assets/general/trash.svg" alt="">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

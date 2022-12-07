@@ -1,0 +1,41 @@
+
+
+<div class="d-flex justify-content-around align-items-center">
+  <app-searchbar></app-searchbar>
+  <app-create-sale></app-create-sale>
+</div>
+<section>
+  <div class="row">
+    <div class="col">
+      <table class="table rounded mt-1">
+        <thead>
+          <tr>
+            <th scope="col">ID PEDIDO</th>
+            <th scope="col">CLIENTE</th>
+            <th scope="col">PRODUCTOS</th>
+            <th scope="col">FECHA ENTREGA</th>
+            <th scope="col">ESTADO</th>
+            <th scope="col">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr >
+            <td class="sale__saleId ms-2">CR-1</td>
+            <td class="sale__customerName ms-2">Mateo Ortiz Vargas</td>
+            <td class="sale__products ms-2">Magnate</td>
+            <td class="sale__deliveryDate ms-2">01/12/2022</td>
+            <td class="sale__deliveryDate ms-2">Pendiente</td>
+            <td>
+              <button class="btn-actions ps-0" >
+                <img class="btn-actions__icons" src="../assets/general/edit.svg" alt="">
+              </button>
+              <button class="btn-actions">
+                <img class="btn-actions__icons" src="../assets/general/invoice.svg" alt="">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

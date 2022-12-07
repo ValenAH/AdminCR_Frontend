@@ -1,0 +1,8 @@
+<div>
+  <app-navbar></app-navbar>
+  <app-sidebar class="py-2" [ngClass]="{'side-nav-open': sideNavStatus}"></app-sidebar>
+
+    <div class="display-area p-1" [ngClass]="{'display-area-shrink': sideNavStatus}">
+      <router-outlet></router-outlet>
+    </div>
+</div>
