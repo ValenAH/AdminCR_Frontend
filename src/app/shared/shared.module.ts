@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { SearchbarComponent } from './searchbar/searchbar.component';
+import { PreloaderComponent } from './preloader/preloader.component';
 
 
 
@@ -11,7 +12,8 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
   declarations: [
     NavbarComponent,
     SidebarComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    PreloaderComponent
   ],
   imports: [
     CommonModule,

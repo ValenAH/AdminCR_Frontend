@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,6 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./navbar.component.sass']
 })
 export class NavbarComponent implements OnInit {
+  @Input() userLogged = '';
 
   @Output() sideNavButton = new EventEmitter<boolean>();
   menuStatus: boolean = false;
@@ -15,9 +16,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // sideNavMove(){
-  //   this.menuStatus = !this.menuStatus;
-  //   this.sideNavButton.emit(this.menuStatus);
-  // }
+  sideNavMove(){
+    this.menuStatus = !this.menuStatus;
+    this.sideNavButton.emit(this.menuStatus);
+    console.log(this.menuStatus);
+  }
 
 }

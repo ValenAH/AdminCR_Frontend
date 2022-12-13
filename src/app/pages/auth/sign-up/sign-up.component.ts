@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent{
   authForm !: FormGroup;
+  @Output() userLogged = new EventEmitter<string>();
 
   constructor(
     private authService: AuthService,
@@ -32,8 +33,8 @@ export class SignUpComponent{
     })
   }
 
-  get userName(){ return this.authForm.get('userName'); }
-  get password() { return this.authForm.get('password')}
+  get userName(){ return this.authForm.get('userName');}
+  get password() { return this.authForm.get('password');}
 
   onSubmit(): void{
     if(this.authForm.valid){
@@ -41,6 +42,7 @@ export class SignUpComponent{
         console.log('Login exitoso');
         this.cookieService.set('token_access', response.data.token ,1,'/');
         this.router.navigate(['/inicio']);
+        this.userLogged.emit(this.userName?.value);
       })
     }
   }

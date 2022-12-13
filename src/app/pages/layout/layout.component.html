@@ -1,5 +1,5 @@
 <div>
-  <app-navbar></app-navbar>
+  <app-navbar (userLogged)="userLogged" (sideNavButton)="sideNavStatus"></app-navbar>
   <app-sidebar class="py-2" [ngClass]="{'side-nav-open': sideNavStatus}"></app-sidebar>
 
     <div class="display-area p-1" [ngClass]="{'display-area-shrink': sideNavStatus}">

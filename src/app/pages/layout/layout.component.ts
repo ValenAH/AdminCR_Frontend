@@ -6,12 +6,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.sass']
 })
 export class LayoutComponent implements OnInit {
+  @Input() userLogged:string = '';
 
-  @Input() sideNavStatus: boolean = false;
+  sideNavStatus: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

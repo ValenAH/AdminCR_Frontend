@@ -1,12 +1,17 @@
 <nav class="navbar navbar-expand p-0">
+  <div class="sidebar-button p-2 rounded text-center d-lg-none" (click)="sideNavMove()">
+    <i class="sidebar-button__barsMenu fa-solid fa-bars"></i>
+  </div>
+
   <div class="container-fluid px-1">
-    <a class="navbar-brand p-0" href="#">
-      <img src="../../../assets/imagesCR/LogoHorizontal.png" alt="Colchones de Reyes" width="350" height="70" class="" [routerLink]="''">
+    <a class="navbar-brand p-0 ps-2" href="#">
+      AdminCR
+      <!-- <img src="../../../assets/imagesCR/LogoHorizontal.png" alt="Colchones de Reyes" width="350" height="70" class="" [routerLink]="''"> -->
     </a>
 
     <div class="dropdown m-1">
       <a class="nav-link dropdown-toggle rounded" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-        username
+        {{userLogged}}
         <i class="userIcon fa-solid fa-user px-1"></i>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenu">

@@ -12,37 +12,44 @@ export class SidebarComponent implements OnInit {
     {
       number: '1',
       name: 'Inicio',
-      path: '/inicio'
+      path: '/inicio',
+      icon: 'fa-solid fa-house'
     },
     {
       number: '2',
       name: 'Usuarios',
-      path: '/usuarios'
+      path: '/usuarios',
+      icon: 'fa-solid fa-user'
     },
     {
       number: '3',
       name: 'Productos',
-      path: '/productos'
+      path: '/productos',
+      icon: 'fa-solid fa-cart-plus'
     },
     {
       number: '4',
       name: 'Clientes',
-      path: '/clientes'
+      path: '/clientes',
+      icon: 'fa-solid fa-users'
     },
     {
       number: '5',
       name: 'Ventas',
-      path: '/ventas'
+      path: '/ventas',
+      icon: 'fa-solid fa-sack-dollar'
     },
     {
       number: '6',
       name: 'Cartera',
-      path: '/cartera'
+      path: '/cartera',
+      icon: 'fa-regular fa-credit-card'
     },
     {
       number: '7',
       name: 'Reportes',
-      path: '/reportes'
+      path: '/reportes',
+      icon: 'fa-solid fa-chart-column'
     }
   ]
 
