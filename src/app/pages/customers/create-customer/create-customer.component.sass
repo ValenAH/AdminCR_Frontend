@@ -1,5 +1,15 @@
 @import '../../../../assets/sass/variables'
 
+input
+  color: $blue
+  background-color: black
+  border: none
+  border-bottom: 2px solid $white
+
+input::placeholder
+  color: $blue
+  font-size: 1rem
+
 .createCustomer
   border: none
   background-color: $blue
@@ -9,9 +19,19 @@
     background-color: #97d3fb
 
 .createCustomerForm
-    position: fixed
-    left: 40%
-    background-color: $white
+  position: fixed
+  width: 40%
+  left: 30%
+  background-color: black
+  box-shadow: 0 0 30px 5px $black
+  opacity: 0.95
+  color: $white
+
+  &__title
+    color: $blue
+
+.container
+  width: 80%
 
 .addCustomer
   border: none
@@ -19,3 +39,19 @@
 
   &:hover
     background-color: #97d3fb
+
+.close
+  position: absolute
+  right: 2%
+  background-color: transparent
+
+  &__icon
+    color: white
+    background-color: $white
+    font-size: 30px
+
+  &__icon:hover
+    color: $blue
+
+  &__icon::before
+    background-color: black

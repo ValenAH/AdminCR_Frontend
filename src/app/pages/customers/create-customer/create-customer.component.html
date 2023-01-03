@@ -2,12 +2,14 @@
   Crear cliente
 </button>
 
-<form [formGroup]="createCustomerForm" class="createCustomerForm" *ngIf="createCustomerOpen">
-  <div class="modal-header">
-    <h5 class="" id="createCustomerLabel">Crear Cliente</h5>
-    <button type="button" class="btn-close" (click)="openComponent()"></button>
+<form [formGroup]="createCustomerForm" class="createCustomerForm rounded" *ngIf="createCustomerOpen">
+  <div class="modal-header justify-content-center">
+    <h5 class="createCustomerForm__title" id="createCustomerLabel">CREAR CLIENTE</h5>
+    <button type="button" class="close m-0 p-0" (click)="openComponent()">
+      <i class="close__icon fa-regular fa-circle-xmark"></i>
+    </button>
   </div>
-  <div class="p-2">
+  <div class="container p-2">
     <div class="">
       <label for="identificationType">Tipo de identificacion</label>
       <input class="w-100" formControlName="identificationType" type="text" id="identificationType" required>
@@ -22,14 +24,14 @@
     </div>
     <div>
       <label for="contactNumber">Número de contacto</label>
-      <input class="w-100" formControlName="contactNumber" type="text" id="contactNumber" required>
+      <input class="w-100" formControlName="contactNumber" type="tel" id="contactNumber" required>
     </div>
     <div>
       <label for="address">Dirección</label>
       <input class="w-100" formControlName="address" type="number" id="address" min="280" required>
     </div>
   </div>
-  <div class="modal-footer justify-content-center">
+  <div class="text-center my-2">
     <button class="addCustomer rounded m-2 p-2" type="button">Agregar Cliente</button>
   </div>
 </form>
