@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { PreloaderComponent } from './preloader/preloader.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,9 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     SidebarComponent,

@@ -1,14 +1,21 @@
 @import '../../../../assets/sass/variables'
 
 input
-  color: $blue
+  color: $white
   background-color: black
   border: none
   border-bottom: 2px solid $white
+  border-radius: 5px
+  padding: 10px
+  margin-y: 10px
 
 input::placeholder
   color: $blue
   font-size: 1rem
+
+input:focus
+  outline: none
+  border: 1px solid $blue
 
 .createUser
   border: none
@@ -16,7 +23,7 @@ input::placeholder
   width: 200px
 
   &:hover
-    background-color: #97d3fb
+    background-color: $hover
 
 .createUserForm
     position: fixed
@@ -25,13 +32,13 @@ input::placeholder
     background-color: black
     box-shadow: 0 0 30px 5px $black
     opacity: 0.95
+    color: $blue
 
     &__title
       color: $blue
 
 .container
   width: 80%
-  color: white
 
 .addUser
   border: none

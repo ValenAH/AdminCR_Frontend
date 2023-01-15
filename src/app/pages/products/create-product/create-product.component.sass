@@ -1,14 +1,21 @@
 @import '../../../../assets/sass/variables'
 
 input
-  color: $blue
+  color: $white
   background-color: black
   border: none
   border-bottom: 2px solid $white
+  border-radius: 5px
+  padding: 10px
+  margin-y: 10px
 
 input::placeholder
   color: $blue
   font-size: 1rem
+
+input:focus
+  outline: none
+  border: 1px solid $blue
 
 .createProduct
   border: none
@@ -25,7 +32,7 @@ input::placeholder
   background-color: black
   box-shadow: 0 0 30px 5px $black
   opacity: 0.95
-  color: $white
+  color: $blue
 
   &__title
     color: $blue

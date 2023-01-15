@@ -16,10 +16,10 @@
     </div>
     <div class="mt-2">
       <label for="deliveryDate">Fecha de entrega</label>
-      <input class="w-100" formControlName="deliveryDate" type="date" id="deliveryDate" required>
+      <input class="date w-100" formControlName="deliveryDate" type="date" id="deliveryDate" required>
     </div>
     <div class="my-4">
-      <app-searchbar></app-searchbar>
+      <app-searchbar (keyup)="filterProducts($event)"></app-searchbar>
     </div>
     <div>
       <section>
@@ -28,20 +28,24 @@
             <table class="table rounded mt-2">
               <thead>
                 <tr>
+                  <th scope="col"></th>
                   <th scope="col">PRODUCTO</th>
                   <th scope="col">DESCRIPCIÓN</th>
+                  <th scope="col">CANTIDAD</th>
                   <th scope="col">PRECIO</th>
-                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let product of products; index as i" class="product">
+                <tr *ngFor="let product of filteredProducts; index as i" class="product">
+                  <td>
+                    <input type="checkbox" (click)="selectProducts(product, i)">
+                  </td>
                   <td class="product__productName ms-2">{{product.productName}}</td>
                   <td class="product__productDescription ms-2">{{product.description}}</td>
-                  <td class="product__productPrice ms-2">{{product.price}}</td>
-                  <td>
-                    <input type="checkbox">
+                  <td class="product__productQuantity ms-2">
+                    <input class="product__productQuantity--inputQuantity" type="text">
                   </td>
+                  <td class="product__productPrice ms-2">{{product.price}}</td>
                 </tr>
               </tbody>
             </table>
@@ -51,10 +55,10 @@
     </div>
     <div>
       <label for="totalAmount">Total</label>
-      <input class="w-100" formControlName="totalAmount" type="number" id="totalAmount" required>
+      <input class="w-100" formControlName="totalAmount" type="number" id="totalAmount" required readonly>
     </div>
   </div>
-  <div class="text-center">
+  <div class="text-center m-4">
     <button class="addSale rounded m-2 p-2" type="button">Agregar Pedido</button>
   </div>
 </form>

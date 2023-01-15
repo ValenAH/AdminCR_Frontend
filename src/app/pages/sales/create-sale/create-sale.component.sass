@@ -17,6 +17,10 @@ input:focus
   outline: none
   border: 1px solid $blue
 
+.date[type="date"]::-webkit-calendar-picker-indicator
+  filter: invert(1)
+  cursor: pointer
+
 .createSale
   border: none
   background-color: $blue
@@ -27,12 +31,13 @@ input:focus
 
 .createSaleForm
   position: fixed
-  width: 40%
-  left: 30%
+  width: 50%
+  top: 8%
+  left: 25%
   background-color: black
   box-shadow: 0 0 30px 5px $black
   opacity: 0.95
-  color: $white
+  color: $blue
 
   &__title
   color: $blue
@@ -80,4 +85,12 @@ thead
 
   &__productName
     text-transform: uppercase
+
+  &__productQuantity
+    width: 100px
+
+    &--inputQuantity
+      width: 60%
+      background-color: $gray-light
+      color: $black
 

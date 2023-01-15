@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,19 +12,18 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent{
   authForm !: FormGroup;
-  @Output() userLogged = new EventEmitter<string>();
+
 
   constructor(
     private authService: AuthService,
     private readonly fb: FormBuilder,
     private cookieService: CookieService,
     private router: Router
-  ){
-
-  }
+  ){ }
 
   ngOnInit(): void {
     this.initForm();
+
   }
 
   private initForm():void {
@@ -42,7 +42,7 @@ export class SignUpComponent{
         console.log('Login exitoso');
         this.cookieService.set('token_access', response.data.token ,1,'/');
         this.router.navigate(['/inicio']);
-        this.userLogged.emit(this.userName?.value);
+        this.authService.sendUser(this.userName?.value);
       })
     }
   }

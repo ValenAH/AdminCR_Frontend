@@ -7,9 +7,10 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AppVigilantGuard implements CanActivate {
-  constructor(private cookieService: CookieService, private router: Router){
-
-  }
+  constructor(
+    private cookieService: CookieService,
+    private router: Router
+  ){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
