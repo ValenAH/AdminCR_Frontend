@@ -20,10 +20,11 @@ export class CreateCustomerComponent implements OnInit {
 
   buildForm(){
     this.createCustomerForm = this.formBuilder.group({
+      identificationType: ['', Validators.required],
+      identificationNumber: ['', Validators.required],
       customerName: ['', Validators.required],
-      description: ['', Validators.required],
-      unitCost: [0, Validators.required],
-      price: [0, Validators.required]
+      contactNumber: ['', Validators.required],
+      address: ['', Validators.required]
     });
   }
 
