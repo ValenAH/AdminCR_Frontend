@@ -1,0 +1,32 @@
+@import '../../../assets/sass/variables.sass'
+@import '../../../assets/fonts/font.sass'
+
+.errorModal
+  position: fixed
+  width: 40%
+  left: 30%
+  background-color: black
+  box-shadow: 0 0 30px 5px $black
+  opacity: 0.95
+
+  &__errorIcon
+      width: 50px
+
+  &__message
+      color: $white
+
+.close
+  position: absolute
+  right: 2%
+  background-color: transparent
+
+  &__icon
+    color: white
+    background-color: $white
+    font-size: 30px
+
+  &__icon:hover
+    color: $blue
+
+  &__icon::before
+    background-color: black

@@ -10,15 +10,16 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 export class CreateProductComponent implements OnInit {
 
   createProductOpen: boolean = false;
-
   createProductForm!: FormGroup ;
   @Output() product = new EventEmitter<Product>();
   @Input() products: Product[] = [{
+    productId: '',
     productName: '',
     description: '',
     unitCost: 0,
     price: 0
   }];
+  counter: number = 0;
 
   constructor(private formBuilder: FormBuilder) {
     this.buildForm();
@@ -49,6 +50,7 @@ openComponent(){
 
 saveProduct(){
   const newProduct: Product = {
+    productId: this.counter.toString(),
     productName: this.productName?.value,
     description: this.description?.value,
     unitCost: this.unitCost?.value,

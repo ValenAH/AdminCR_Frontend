@@ -2,30 +2,63 @@
   Crear pedido
 </button>
 
-<form [formGroup]="createSaleForm" class="createSaleForm" *ngIf="createSaleOpen">
-  <div class="modal-header">
-    <h5 class="" id="createSaleLabel">Crear pedido</h5>
-    <button type="button" class="btn-close" (click)="openComponent()"></button>
+<form [formGroup]="createSaleForm" class="createSaleForm rounded" *ngIf="createSaleOpen">
+  <div class="modal-header justify-content-center">
+    <h5 class="createSaleForm__title" id="createSaleLabel">CREAR PEDIDO</h5>
+    <button type="button" class="close m-0 p-0" (click)="openComponent()">
+      <i class="close__icon fa-regular fa-circle-xmark"></i>
+    </button>
   </div>
-  <div class="p-2">
-    <div class="">
+  <div class="container p-2">
+    <div class="mt-2">
       <label for="customerName">Cliente</label>
       <input class="w-100" formControlName="customerName" type="text" id="customerName" required>
     </div>
-    <div>
-      <label for="description">Descripcion</label>
-      <input class="w-100" formControlName="description" type="text" id="description" required>
+    <div class="mt-2">
+      <label for="deliveryDate">Fecha de entrega</label>
+      <input class="date w-100" formControlName="deliveryDate" type="date" id="deliveryDate" required>
+    </div>
+    <div class="my-4">
+      <app-searchbar (keyup)="filterProducts($event)"></app-searchbar>
     </div>
     <div>
-      <label for="unitCost">Costo</label>
-      <input class="w-100" formControlName="unitCost" type="number" id="unitCost" min="280" required>
+      <section>
+        <div class="row">
+          <div class="col">
+            <table class="table rounded mt-2">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">PRODUCTO</th>
+                  <th scope="col">DESCRIPCIÓN</th>
+                  <th scope="col">CANTIDAD</th>
+                  <th scope="col">PRECIO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of filteredProducts; index as i" class="product">
+                  <td>
+                    <input type="checkbox" (click)="selectProducts(product, i)">
+                  </td>
+                  <td class="product__productName ms-2">{{product.productName}}</td>
+                  <td class="product__productDescription ms-2">{{product.description}}</td>
+                  <td class="product__productQuantity ms-2">
+                    <input class="product__productQuantity--inputQuantity" type="text">
+                  </td>
+                  <td class="product__productPrice ms-2">{{product.price}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     </div>
     <div>
-      <label for="price">Precio</label>
-      <input class="w-100" formControlName="price" type="number" id="price" min="280" required>
+      <label for="totalAmount">Total</label>
+      <input class="w-100" formControlName="totalAmount" type="number" id="totalAmount" required readonly>
     </div>
   </div>
-  <div class="modal-footer justify-content-center">
+  <div class="text-center m-4">
     <button class="addSale rounded m-2 p-2" type="button">Agregar Pedido</button>
   </div>
 </form>

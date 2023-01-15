@@ -2,31 +2,35 @@
   Crear producto
 </button>
 
-<form [formGroup]="createProductForm" class="createProductForm" *ngIf="createProductOpen">
-  <div class="modal-header">
-    <h5 class="" id="createProductLabel">Crear Producto</h5>
-    <button type="button" class="btn-close" (click)="openComponent()"></button>
+<form [formGroup]="createProductForm" class="createProductForm rounded" *ngIf="createProductOpen">
+  <div class="modal-header justify-content-center">
+    <h5 class="createProductForm__title" id="createProductLabel">CREAR PRODUCTO</h5>
+    <button type="button" class="close m-0 p-0" (click)="openComponent()">
+      <i class="close__icon fa-regular fa-circle-xmark"></i>
+    </button>
   </div>
-  <div class="p-2">
-    <div class="">
-      <label for="productName">Nombre</label>
-      <input class="w-100" formControlName="productName" type="text" id="productName" required>
+  <div class="container">
+    <div class="p-2">
+      <div class="mt-2">
+        <label for="productName">Nombre</label>
+        <input class="w-100" formControlName="productName" type="text" id="productName" required>
+      </div>
+      <div class="mt-2">
+        <label for="description">Descripcion</label>
+        <input class="w-100" formControlName="description" type="text" id="description" required>
+      </div>
+      <div class="mt-2">
+        <label for="unitCost">Costo</label>
+        <input class="w-100" formControlName="unitCost" type="number" id="unitCost" min="280" required>
+      </div>
+      <div class="mt-2">
+        <label for="price">Precio</label>
+        <input class="w-100" formControlName="price" type="number" id="price" min="280" required>
+      </div>
     </div>
-    <div>
-      <label for="description">Descripcion</label>
-      <input class="w-100" formControlName="description" type="text" id="description" required>
+    <div class="text-center my-2">
+      <button class="addProduct rounded m-2 p-2" type="button" (click)="saveProduct()">Agregar Producto</button>
     </div>
-    <div>
-      <label for="unitCost">Costo</label>
-      <input class="w-100" formControlName="unitCost" type="number" id="unitCost" min="280" required>
-    </div>
-    <div>
-      <label for="price">Precio</label>
-      <input class="w-100" formControlName="price" type="number" id="price" min="280" required>
-    </div>
-  </div>
-  <div class="modal-footer justify-content-center">
-    <button class="addProduct rounded m-2 p-2" type="button" (click)="saveProduct()">Agregar Producto</button>
   </div>
 </form>
 

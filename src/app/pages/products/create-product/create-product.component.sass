@@ -1,21 +1,65 @@
 @import '../../../../assets/sass/variables'
 
+input
+  color: $white
+  background-color: black
+  border: none
+  border-bottom: 2px solid $white
+  border-radius: 5px
+  padding: 10px
+  margin-y: 10px
+
+input::placeholder
+  color: $blue
+  font-size: 1rem
+
+input:focus
+  outline: none
+  border: 1px solid $blue
+
 .createProduct
   border: none
   background-color: $blue
   width: 200px
 
   &:hover
-    background-color: #97d3fb
+    background-color: $hover
 
 .createProductForm
-    position: fixed
-    left: 40%
-    background-color: $white
+  position: fixed
+  width: 40%
+  left: 30%
+  background-color: black
+  box-shadow: 0 0 30px 5px $black
+  opacity: 0.95
+  color: $blue
+
+  &__title
+    color: $blue
+
+.container
+  width: 80%
 
 .addProduct
   border: none
   background-color: $blue
 
+  &:hover
+    background-color: #97d3fb
 
 
+.close
+  position: absolute
+  right: 2%
+  background-color: transparent
+
+  &__icon
+    color: white
+    background-color: $white
+    font-size: 30px
+
+  &__icon:hover
+    color: $blue
+
+  &__icon::before
+    background-color: black

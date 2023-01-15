@@ -2,27 +2,29 @@
   Crear usuario
 </button>
 
-<form [formGroup]="createUserForm" class="createUserForm" *ngIf="createUserOpen">
-  <div class="modal-header">
-    <h5 class="" id="createUserLabel">Crear Usuario</h5>
-    <button type="button" class="btn-close" (click)="openComponent()"></button>
+<form [formGroup]="createUserForm" class="createUserForm rounded" *ngIf="createUserOpen">
+  <div class="modal-header justify-content-center ">
+    <h5 class="createUserForm__title" id="createUserLabel">CREAR USUARIO</h5>
+    <button type="button" class="close m-0 p-0" (click)="openComponent()">
+      <i class="close__icon fa-regular fa-circle-xmark"></i>
+    </button>
   </div>
-  <div class="p-2">
-    <div class="">
+  <div class="container p-4">
+    <div class="p-1">
       <label for="userName">Nombre</label>
       <input class="w-100" formControlName="userName" type="text" id="userName" required>
     </div>
-    <div>
+    <div class="p-1">
       <label for="password">Contraseña</label>
       <input class="w-100" formControlName="password" type="text" id="password" required>
     </div>
-    <div>
+    <div class="p-1">
       <label for="rol">Rol</label>
       <input class="w-100" formControlName="rol" type="number" id="rol" min="280" required>
     </div>
-  </div>
-  <div class="modal-footer justify-content-center">
-    <button class="addUser rounded m-2 p-2" type="button">Agregar usuario</button>
+    <div class="text-center mt-3">
+      <button class="addUser rounded m-2 p-2" type="button">Agregar usuario</button>
+    </div>
   </div>
 </form>
 

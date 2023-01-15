@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { SearchbarService } from '../../services/searchbar.service';
 
 @Component({
   selector: 'app-sales',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalesComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+    private searchbarService: SearchbarService
+  ) { }
 
   ngOnInit(): void {
   }
+
+
 
 }

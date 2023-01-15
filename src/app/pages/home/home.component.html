@@ -1,10 +1,10 @@
 <section class="m-3">
   <h1 class="py-2">Pedidos pendientes</h1>
   <div class="orders d-flex rounded">
-    <div class="orders-item p-4 rounded m-2">
+    <div class="orders-item p-4 rounded m-2 relative">
       <div class="d-flex justify-content-between">
         <h2>Mateo Ortiz Vargas</h2>
-        <p>2 enero 2023</p>
+        <p class="orders-item__date px-2">2 enero 2023</p>
       </div>
       <div>
         <div class="d-flex justify-content-between">
@@ -13,6 +13,7 @@
             280
           </div>
         </div>
+        <div class="d-flex justify-content-between">
           <ol>
             <li class="d-flex">
               <p>MAGNATE</p>
@@ -23,13 +24,17 @@
               <p class="ms-2">Sencilla</p>
             </li>
           </ol>
+          <button class="btn-actions">
+            <img class="btn-actions__icons" src="../../../assets/general/invoice.svg" alt="">
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="orders-item p-4 rounded m-2">
       <div class="d-flex justify-content-between">
         <h2>Cristian Alzate</h2>
-        <p>3 enero 2023</p>
+        <p class="orders-item__date px-2">3 enero 2023</p>
       </div>
       <div>
         <div class="d-flex justify-content-between">
@@ -38,23 +43,28 @@
             500
           </div>
         </div>
+        <div class="d-flex justify-content-between">
           <ol>
             <li class="d-flex">
-              <p>EMPERADOR</p>
-              <p class="ms-2"> 200x200</p>
+              <p>REY</p>
+              <p class="ms-2">120x190</p>
             </li>
             <li class="d-flex">
               <p>ALMOHADA</p>
               <p class="ms-2">Siliconada</p>
             </li>
           </ol>
+          <button class="btn-actions">
+            <img class="btn-actions__icons" src="../../../assets/general/invoice.svg" alt="">
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="orders-item p-4 rounded m-2">
       <div class="d-flex justify-content-between">
         <h2>Valentina Alzate</h2>
-        <p>3 enero 2023</p>
+        <p class="orders-item__date px-2">3 enero 2023</p>
       </div>
       <div>
         <div class="d-flex justify-content-between">
@@ -63,23 +73,28 @@
             500
           </div>
         </div>
+        <div class="d-flex justify-content-between">
           <ol>
             <li class="d-flex">
-              <p>EMPERADOR</p>
-              <p class="ms-2"> 200x200</p>
+              <p>MAGNATE</p>
+              <p class="ms-2">200x200</p>
             </li>
             <li class="d-flex">
-              <p>ALMOHADA</p>
-              <p class="ms-2">Siliconada</p>
+              <p>BASECAMA</p>
+              <p class="ms-2">200x200</p>
             </li>
           </ol>
+          <button class="btn-actions">
+            <img class="btn-actions__icons" src="../../../assets/general/invoice.svg" alt="">
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="orders-item p-4 rounded m-2">
       <div class="d-flex justify-content-between">
         <h2>Liliana Hincapié</h2>
-        <p>4 enero 2023</p>
+        <p class="orders-item__date px-2">4 enero 2023</p>
       </div>
       <div>
         <div class="d-flex justify-content-between">
@@ -103,3 +118,10 @@
   </div>
 </section>
 
+<section class="m-3">
+  <h1 class="py-2">Accesos rápidos</h1>
+  <div class="relative">
+    <app-create-sale></app-create-sale>
+  </div>
+
+</section>

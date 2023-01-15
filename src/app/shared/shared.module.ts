@@ -5,6 +5,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { PreloaderComponent } from './preloader/preloader.component';
+import { ErrorMessageComponent } from './error-message/error-message.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -13,16 +15,21 @@ import { PreloaderComponent } from './preloader/preloader.component';
     NavbarComponent,
     SidebarComponent,
     SearchbarComponent,
-    PreloaderComponent
+    PreloaderComponent,
+    ErrorMessageComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     SidebarComponent,
     NavbarComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    PreloaderComponent,
+    ErrorMessageComponent
   ]
 })
 export class SharedModule { }
