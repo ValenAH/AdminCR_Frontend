@@ -59,12 +59,12 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getSidebarAction();
   }
 
   getSidebarAction(){
     this.sidebarService.sidebarAction$.subscribe(action =>{
       this.showSidebar = action;
-      console.log(action);
     });
   }
 

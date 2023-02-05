@@ -14,17 +14,27 @@
             <th scope="col">CLIENTE</th>
             <th scope="col">PRODUCTOS</th>
             <th scope="col">FECHA ENTREGA</th>
+            <th scope="col">MÉTODO DE PAGO</th>
+            <th scope="col">VALOR TOTAL</th>
             <th scope="col">ESTADO</th>
             <th scope="col">ACCIONES</th>
           </tr>
         </thead>
         <tbody>
-          <tr >
-            <td class="sale__saleId ms-2">CR-1</td>
-            <td class="sale__customerName ms-2">Mateo Ortiz Vargas</td>
-            <td class="sale__products ms-2">Magnate</td>
-            <td class="sale__deliveryDate ms-2">01/12/2022</td>
-            <td class="sale__deliveryDate ms-2">Pendiente</td>
+          <tr *ngFor="let sale of sales">
+            <td class="sale__saleId ms-2">{{sale.orderId}}</td>
+            <td class="sale__customerName ms-2">{{sale.customer.customerName}}</td>
+            <td class="sale__products ms-2">
+              <tr *ngFor="let product of sale.productList">
+                <td class="pe-2">{{product.quantity}}</td>
+                <td class="pe-2">{{product.productName}}</td>
+                <td>{{product.price}}</td>
+              </tr>
+            </td>
+            <td class="sale__deliveryDate ms-2">{{sale.deliveryDate}}</td>
+            <td class="sale__paymentMethod ms-2">{{sale.paymentMethod}}</td>
+            <td class="sale__paymentMethod ms-2">{{sale.totalAmount}}</td>
+            <td class="sale__orderStatus ms-2">{{sale.orderStatus}}</td>
             <td>
               <button class="btn-actions ps-0" >
                 <img class="btn-actions__icons" src="../assets/general/edit.svg" alt="">

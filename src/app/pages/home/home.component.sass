@@ -2,10 +2,12 @@
 @import '../../../assets/fonts/font.sass'
 
 .orders
+    display: flex
+    flex-direction: column
     box-shadow: 0 0 5px 1px $boxShadow
 
     &-item
-        width: 25%
+        width: 100%
         border: 1px solid $boxShadow
         cursor: pointer
 
@@ -29,3 +31,16 @@
       border: none
       background-color: $blue
       width: 200px
+
+
+@media screen and (min-width: 800px)
+  .orders
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-gap: 10px
+
+@media screen and (min-width: 1300px)
+  .orders
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    grid-gap: 10px

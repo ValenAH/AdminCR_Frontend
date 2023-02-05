@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient,  HttpHeaders } from '@angular/common/http'
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, tap, map, catchError, of } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -17,12 +17,15 @@ export class AuthService {
   }
 
   signUp(userName:string, password:string){
-    let header = new HttpHeaders()
-      .set('Type-content','aplication/json')
 
-    return this.http.post(this._urlApi+ "Auth/Login", {UserName : userName,Password:password} ,{
-      headers: header
-    });
+    return this.http.post(this._urlApi+ "Auth/Login", {UserName : userName,Password:password});
+  }
+
+  validateToken(): Observable<boolean>{
+    return this.http.get(this._urlApi+ "Auth/AuthRoute").pipe(
+      map(res => true),
+      catchError(error => of(false))
+    );
   }
 
   public sendUser(user: string){

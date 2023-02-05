@@ -1,8 +1,5 @@
 @import '../../../assets/sass/variables.sass'
 
-.sidebar-button
-  position: absolute
-  left: 120px
 
 app-navbar
   width: 100%
@@ -12,7 +9,7 @@ app-navbar
   z-index: 2
 
 app-sidebar
-  position: absolute
+  position: fixed
   left: 0rem
   top: 4rem
   width: 150px
@@ -21,18 +18,21 @@ app-sidebar
   overflow-x: hidden
   box-shadow: 0px 0px 20px #4b4a4a
   border-top: 1px solid $white
-  transition: width 250ms ease-in
+  transition: 280ms ease-out
+  transform: translateX(-100%)
 
-.side-nav-open
-   width: 150px
+  &.active
+    transform: translateX(0)
+
 
 .display-area
-  position: absolute
+  position: fixed
   left: 150px
   top: 4rem
   width: calc( 100% - 150px )
-  transition: left 250ms ease-in
+  transition: 230ms ease-out
 
-.display-area-shrink
-  width: calc( 100% - 150px )
-  left: 150px
+  &.active
+    left: 0
+    width: 100%
+

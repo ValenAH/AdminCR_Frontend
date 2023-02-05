@@ -12,9 +12,12 @@
             <h1 class="login-section__title m-4 text-uppercase">INICIAR SESIÓN</h1>
           </div>
           <input formControlName="userName" autocomplete="false"
-          class="mx-auto my-2 p-2 text-center" type="userName" placeholder="Escribe tu usuario">
+          class="mx-auto my-2 p-2 text-center" type="userName" placeholder="Escribe tu usuario" [autocomplete]="false">
           <input formControlName="password" autocomplete="false"
-          class="mx-auto my-2 p-2 text-center" type="password" placeholder="Escribe tu contraseña">
+          class="mx-auto my-2 p-2 text-center" type="password" placeholder="Escribe tu contraseña" [autocomplete]="false">
+          <div *ngIf="error">
+            <p class="login-section__error">Usuario y/o contraseña incorrecta</p>
+          </div>
           <button class="login-section__btnLogin m-2 p-2 mx-auto text-decoration-none" type="submit" value="Send">INGRESAR</button>
         </form>
       </div>

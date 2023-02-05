@@ -37,7 +37,7 @@ export class CreateSaleComponent implements OnInit {
     },
   ]
   filteredProducts: Product[] = this.products;
-  selectedProducts: Array<Product> = [];
+  shoppingCart: Array<Product> = [];
   totalSale: number= 0;
 
   constructor(private formBuilder: FormBuilder,
@@ -50,12 +50,12 @@ export class CreateSaleComponent implements OnInit {
 
   }
 
+
   buildSaleForm(){
     this.createSaleForm = this.formBuilder.group({
       customerName: ['', Validators.required],
       deliveryDate: ['', Validators.required],
-      productsList: [null, Validators.required],
-      totalAmount: [0, Validators.required]
+      productsList: [[], Validators.required]
     });
   }
 
@@ -90,18 +90,9 @@ export class CreateSaleComponent implements OnInit {
     }
   }
 
-  selectProducts(product: Product, i: any){
-    console.log(i);
-    this.selectedProducts.push(product);
-    this.setTotalAmount(this.selectedProducts);
+  addToCart(product: Product){
+    this.shoppingCart.push(product);
+    this.totalSale = this.shoppingCart.reduce((sum,item) => sum + item.price, 0)
+    console.log(this.shoppingCart)
   }
-
-  setTotalAmount(productsChecked: Array<Product>){
-    this.totalSale = 0;
-    productsChecked.map(product =>{
-      this.totalSale += product.price
-    });
-    this.totalAmount?.setValue(this.totalSale);
-  }
-
 }
