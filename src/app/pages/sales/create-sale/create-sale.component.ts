@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Product } from '../../../common/models/product.model';
 import { SearchbarService } from '../../../services/searchbar.service';
+import { ShoppingCartService } from '../../../services/shopping-cart.service';
 
 @Component({
   selector: 'app-create-sale',
@@ -38,12 +39,15 @@ export class CreateSaleComponent implements OnInit {
   ]
   filteredProducts: Product[] = this.products;
   shoppingCart: Array<Product> = [];
+
   totalSale: number= 0;
 
   constructor(private formBuilder: FormBuilder,
-    private searchbarService: SearchbarService
+    private searchbarService: SearchbarService,
+    private shoppingCartService: ShoppingCartService
     ) {
     this.buildSaleForm();
+    this.shoppingCart = this.shoppingCartService.getShoppingCart();
   }
 
   ngOnInit(): void {
@@ -62,7 +66,6 @@ export class CreateSaleComponent implements OnInit {
   get customerName(){ return this.createSaleForm.get('customerName');}
   get deliveryDate(){ return this.createSaleForm.get('deliveryDate');}
   get productsList(){ return this.createSaleForm.get('products');}
-  get totalAmount(){ return this.createSaleForm.get('totalAmount');}
 
   openComponent(){
     this.createSaleOpen = !this.createSaleOpen
@@ -91,8 +94,7 @@ export class CreateSaleComponent implements OnInit {
   }
 
   addToCart(product: Product){
-    this.shoppingCart.push(product);
-    this.totalSale = this.shoppingCart.reduce((sum,item) => sum + item.price, 0)
-    console.log(this.shoppingCart)
+      this.shoppingCartService.addProduct(product);
+      this.totalSale = this.shoppingCartService.getTotal();
   }
 }
