@@ -20,6 +20,10 @@
           </div>
           <button class="login-section__btnLogin m-2 p-2 mx-auto text-decoration-none" type="submit" value="Send">INGRESAR</button>
         </form>
+
+        <div *ngIf="status === 'failed'">
+          <p>Credenciales invalidas</p>
+        </div>
       </div>
     </div>
   </div>

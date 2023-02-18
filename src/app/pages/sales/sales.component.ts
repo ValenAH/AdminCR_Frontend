@@ -8,6 +8,8 @@ import { Sale } from '../../common/models/sale.model';
 })
 export class SalesComponent implements OnInit {
 
+  today = new Date();
+  date = new Date(2021, 1, 21);
 
   sales: Sale[] = [
     {

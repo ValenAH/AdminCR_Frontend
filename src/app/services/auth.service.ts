@@ -17,8 +17,7 @@ export class AuthService {
   }
 
   signUp(userName:string, password:string){
-
-    return this.http.post(this._urlApi+ "Auth/Login", {UserName : userName,Password:password});
+    return this.http.post(`${this._urlApi}Auth/Login`, { UserName : userName,Password:password });
   }
 
   validateToken(): Observable<boolean>{

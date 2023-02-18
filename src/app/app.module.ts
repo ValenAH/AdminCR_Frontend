@@ -18,15 +18,17 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
     SharedModule,
     HttpClientModule
   ],
-  providers: [{
+  providers: [
+  //   {
 
-    provide: HTTP_INTERCEPTORS,
+  //   provide: HTTP_INTERCEPTORS,
 
-    useClass: AuthInterceptorService,
+  //   useClass: AuthInterceptorService,
 
-    multi: true
+  //   multi: true
 
-  }],
+  // }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

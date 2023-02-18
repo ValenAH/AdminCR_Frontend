@@ -1,5 +1,6 @@
-
-
+<p>Crear pedido | uppercase</p>
+<p>Hoy: {{today | date: 'short'}}</p>
+<p>Otra Fecha: {{date | date: 'yyyy.dd.MM'}}</p>
 <div class="d-flex justify-content-around align-items-center">
   <app-searchbar></app-searchbar>
   <app-create-sale></app-create-sale>
@@ -28,7 +29,7 @@
               <tr *ngFor="let product of sale.productList">
                 <td class="pe-2">{{product.quantity}}</td>
                 <td class="pe-2">{{product.productName}}</td>
-                <td>{{product.price}}</td>
+                <td>{{product.price | currency: 'COP'}}</td>
               </tr>
             </td>
             <td class="sale__deliveryDate ms-2">{{sale.deliveryDate}}</td>
