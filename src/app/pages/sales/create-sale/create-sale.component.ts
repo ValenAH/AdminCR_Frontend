@@ -12,30 +12,7 @@ export class CreateSaleComponent implements OnInit {
   createSaleOpen: boolean = false;
   createSaleForm!: FormGroup ;
   productToSearch: string = '';
-  products: Product[] = [
-    {
-      productId: '1',
-      productName: 'Emperador',
-      description: 'Colchón Doble Pillow',
-      unitCost: 290,
-      price: 380,
-      category: 'Somier'
-    },
-    {
-      productId: '1',
-      productName: 'Magnate',
-      description: 'Colchón de un pillow',
-      unitCost: 290,
-      price: 380,
-    },
-    {
-      productId: '1',
-      productName: 'Rey',
-      description: 'Colchón sencillo',
-      unitCost: 290,
-      price: 380,
-    },
-  ]
+  products: Product[] = [];
   filteredProducts: Product[] = this.products;
   selectedProducts: Array<Product> = [];
   totalSale: number= 0;
@@ -65,8 +42,7 @@ export class CreateSaleComponent implements OnInit {
   get totalAmount(){ return this.createSaleForm.get('totalAmount');}
 
   openComponent(){
-    this.createSaleOpen = !this.createSaleOpen
-  }
+    this.createSaleOpen = !this.createSaleOpen }
 
   getWordToSearch(){
     this.productToSearch = '';

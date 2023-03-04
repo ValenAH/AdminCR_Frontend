@@ -12,13 +12,8 @@ export class CreateProductComponent implements OnInit {
   createProductOpen: boolean = false;
   createProductForm!: FormGroup ;
   @Output() product = new EventEmitter<Product>();
-  @Input() products: Product[] = [{
-    productId: '',
-    productName: '',
-    description: '',
-    unitCost: 0,
-    price: 0
-  }];
+  @Input() products: Product[] = [];
+
   counter: number = 0;
 
   constructor(private formBuilder: FormBuilder) {
@@ -49,19 +44,16 @@ openComponent(){
 }
 
 saveProduct(){
-  const newProduct: Product = {
-    productId: this.counter.toString(),
-    productName: this.productName?.value,
-    description: this.description?.value,
-    unitCost: this.unitCost?.value,
-    price: this.price?.value
-    };
-    this.product.emit(newProduct);
-    this.createProductOpen = false;
-    console.log('Este es el nuevo producto:' + newProduct.productName)
+  // const newProduct: Product = {
+  //   productId: this.counter,
+  //   productName: this.productName?.value,
+  //   description: this.description?.value,
+  //   unitCost: this.unitCost?.value,
+  //   price: this.price?.value
+  //   };
+  //   this.product.emit(newProduct);
+  //   this.createProductOpen = false;
+  //   console.log('Este es el nuevo producto:' + newProduct.productName)
+  // }
   }
 }
-
-
-
-

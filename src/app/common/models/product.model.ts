@@ -1,8 +1,10 @@
 export interface Product {
-  productId: string,
+  productId: number,
   productName: string,
   description: string,
-  unitCost: number,
   price: number,
-  category?: string
+  unitCost: number,
+  stock: number,
+  categoryId?: string,
+  enable: boolean
 }

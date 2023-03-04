@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({providedIn: 'root'})
 
 export class AuthService {
-  private _urlApi: string
+  private _urlApi: string;
   private user = new BehaviorSubject<string>('');
   public userLogged$ = this.user.asObservable();
 
