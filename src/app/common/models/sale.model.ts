@@ -6,7 +6,7 @@ export interface Sale {
   customer: Customer,
   productList: Product[],
   deliveryDate: string,
-  paymentMethod: string,
+  paymentMethod?: string,
   totalAmount: number,
   orderStatus: string
 }
