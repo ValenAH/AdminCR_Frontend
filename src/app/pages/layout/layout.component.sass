@@ -30,9 +30,27 @@ app-sidebar
   left: 150px
   top: 4rem
   width: calc( 100% - 150px )
+  height: calc( 100% - 4rem )
   transition: 230ms ease-out
+  overflow-x: hidden
+  overflow-y: auto
 
   &.active
     left: 0
     width: 100%
 
+::-webkit-scrollbar
+  width: .8em
+
+::-webkit-scrollbar-track
+  background: #e8e7e7
+  border-radius: 100vw
+  margin-block: .3em
+
+::-webkit-scrollbar-thumb
+  background: $blue
+  border: .15em solid #e8e7e7
+  border-radius: 100vw
+
+::-webkit-scrollbar-thumb:hover
+  background: $hover

@@ -47,7 +47,8 @@ export class SignUpComponent{
       .subscribe({
         next: () =>{
           this.status = 'success';
-          this.router.navigate(['/inicio'])
+          this.router.navigate(['/inicio']);
+          this.authService.sendUser(this.userName?.value);
         },
         error: () => {
           this.status = 'failed'
@@ -55,9 +56,9 @@ export class SignUpComponent{
         }
         // localStorage.setItem('token', response.data.token)
         // this.router.navigate(['/inicio']);
-        // this.authService.sendUser(this.userName?.value);
         // Swal.fire("Bienvenido", this.userName?.value , "success")
       });
+
     }
     else{
       this.authForm.markAllAsTouched();

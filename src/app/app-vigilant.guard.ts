@@ -22,6 +22,7 @@ export class AuthGuard implements CanActivate {
         if(!isAuth){
           localStorage.removeItem('token');
           this.router.navigateByUrl('iniciar-sesion');
+          console.log(isAuth)
         }
       })
     );

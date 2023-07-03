@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Product } from '../../../common/models/product.model';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ProductService } from 'src/app/services/product.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-product',
@@ -8,28 +10,29 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./create-product.component.sass']
 })
 export class CreateProductComponent implements OnInit {
-
-  createProductOpen: boolean = false;
-  createProductForm!: FormGroup ;
-  @Output() product = new EventEmitter<Product>();
-  @Input() products: Product[] = [{
-    productId: '',
-    productName: '',
-    description: '',
-    unitCost: 0,
-    price: 0
-  }];
-  counter: number = 0;
-
-  constructor(private formBuilder: FormBuilder) {
-    this.buildForm();
-  }
+  public productForm!: FormGroup ;
+  public productId: number = 0;
+  public productCreated : boolean = false;
+  public message : string = '';
+  constructor(
+    private formBuilder: FormBuilder,
+    private productService: ProductService,
+    private router : Router,
+    private route : ActivatedRoute
+    ) {  }
 
   ngOnInit(): void {
+    this.buildForm();
+    this.route.params.subscribe((params: Params)=>{
+      this.productId = Number(params['id']);
+      if(this.productId){
+        this.getProductById();
+      }
+    })
   }
 
   buildForm(){
-    this.createProductForm = this.formBuilder.group({
+    this.productForm = this.formBuilder.group({
       productName: ['', Validators.required],
       description: ['', Validators.required],
       unitCost: [0, Validators.required],
@@ -37,28 +40,43 @@ export class CreateProductComponent implements OnInit {
     });
   }
 
-  get productName(){ return this.createProductForm.get('productName')};
-  get description(){ return this.createProductForm.get('description')};
-  get unitCost(){ return this.createProductForm.get('unitCost')};
-  get price(){ return this.createProductForm.get('price')};
+  get productName(){ return this.productForm.get('productName')};
+  get description(){ return this.productForm.get('description')};
+  get unitCost(){ return this.productForm.get('unitCost')};
+  get price(){ return this.productForm.get('price')};
 
+  getProductById(){
+    this.productService.getProductById(this.productId).subscribe( (response : any) =>{
+      this.productForm.patchValue(response.data)
+    })
+  }
 
+  saveForm(){
+    if(this.productId){
+      this.updateProduct();
+    } else {
+      this.saveProduct();
+    }
+  }
 
-openComponent(){
-  this.createProductOpen = !this.createProductOpen
-}
+  saveProduct(){
+    this.productService.saveProduct(this.productForm.value).subscribe({
+      next: (response : any)=>{
+        this.productCreated = true;
+        this.message = response.header.message;
+        setTimeout(() => {
+          this.router.navigate(['/productos'])
+        }, 3000)
+      }
+    })
+  }
 
-saveProduct(){
-  const newProduct: Product = {
-    productId: this.counter.toString(),
-    productName: this.productName?.value,
-    description: this.description?.value,
-    unitCost: this.unitCost?.value,
-    price: this.price?.value
-    };
-    this.product.emit(newProduct);
-    this.createProductOpen = false;
-    console.log('Este es el nuevo producto:' + newProduct.productName)
+  updateProduct(){
+    this.productService.updateProduct(this.productForm.value).subscribe({
+      next: (response: any) =>{
+
+      }
+    })
   }
 }
 

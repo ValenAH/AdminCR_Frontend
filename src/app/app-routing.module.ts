@@ -20,13 +20,13 @@ const routes: Routes = [
 {
   path: '',
   component: LayoutComponent,
-  canActivate: [AuthGuard],
+  // canActivate: [AuthGuard],
   data: { title: 'Inicio' },
   children: [
     {
       path: 'inicio',
       component: HomeComponent,
-      canActivate: [AuthGuard],
+      // canActivate: [AuthGuard],
       loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
       data: {
         title: 'Inicio'

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { SearchbarService } from '../../services/searchbar.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -8,12 +7,10 @@ import { SearchbarService } from '../../services/searchbar.service';
   styleUrls: ['./searchbar.component.sass']
 })
 export class SearchbarComponent implements OnInit {
-
+  @Output() searchTextChanged = new EventEmitter<string>();
   wordToSearch!: FormControl;
 
-  constructor(
-    private searchbarService: SearchbarService
-  ) { }
+  constructor( ) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -23,10 +20,9 @@ export class SearchbarComponent implements OnInit {
     this.wordToSearch = new FormControl('');
   }
 
-  searchWord(){
-    if(this.wordToSearch.value != ''){
-      this.searchbarService.searchWord(this.wordToSearch.value);
-    }
+  searchText(){
+    this.searchTextChanged.emit(this.wordToSearch.value);
   }
+
 
 }

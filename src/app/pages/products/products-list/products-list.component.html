@@ -1,0 +1,40 @@
+<section>
+  <div class="col-lg-12 col-md-12 d-flex justify-content-around align-items-center">
+    <app-searchbar (searchTextChanged)="searchText($event)" class="col-lg-6 col-md-7"></app-searchbar>
+    <div class="col-lg-4">
+      <button routerLink="crear" class="createProduct rounded m-3">Crear producto</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table rounded mt-2">
+        <thead>
+          <tr>
+            <th scope="col">PRODUCTO</th>
+            <th scope="col">DESCRIPCIÓN</th>
+            <th scope="col">COSTO</th>
+            <th scope="col">PRECIO</th>
+            <th scope="col">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products | productFilter : textToSearch" class="product">
+            <td class="product__productName ms-2">{{product.productName}}</td>
+            <td class="product__productDescription ms-2">{{product.description}}</td>
+            <td class="product__productCost ms-2">$ {{product.unitCost | number}}</td>
+            <td class="product__productPrice ms-2">$ {{product.price | number}}</td>
+            <td>
+              <button class="btn-delete  p-0" >
+                <img src="../assets/general/edit.svg" routerLink="editar/{{product.productId}}" alt="">
+              </button>
+              <button class="btn-delete  p-0" >
+                <img src="../assets/general/trash.svg" alt="">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+

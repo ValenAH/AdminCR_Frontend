@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Product } from '../../../common/models/product.model';
-import { SearchbarService } from '../../../services/searchbar.service';
 import { ShoppingCartService } from '../../../services/shopping-cart.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class CreateSaleComponent implements OnInit {
   productToSearch: string = '';
   products: Product[] = [
     {
-      productId: '1',
       productName: 'Emperador',
       description: 'Colchón Doble Pillow',
       unitCost: 290,
@@ -23,14 +21,12 @@ export class CreateSaleComponent implements OnInit {
       category: 'Somier'
     },
     {
-      productId: '1',
       productName: 'Magnate',
       description: 'Colchón de un pillow',
       unitCost: 290,
       price: 380,
     },
     {
-      productId: '1',
       productName: 'Rey',
       description: 'Colchón sencillo',
       unitCost: 290,
@@ -43,7 +39,6 @@ export class CreateSaleComponent implements OnInit {
   totalSale: number= 0;
 
   constructor(private formBuilder: FormBuilder,
-    private searchbarService: SearchbarService,
     private shoppingCartService: ShoppingCartService
     ) {
     this.buildSaleForm();
@@ -72,10 +67,7 @@ export class CreateSaleComponent implements OnInit {
   }
 
   getWordToSearch(){
-    this.productToSearch = '';
-    this.searchbarService.wordtoSearch$.subscribe(word =>{
-      this.productToSearch = word;
-    })
+
   }
 
   filterProducts(e: any){

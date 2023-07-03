@@ -6,11 +6,15 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
+import { ProductsListComponent } from './products-list/products-list.component';
+import { ProductFilterPipe } from 'src/app/pipes/productFilter.pipe';
 
 @NgModule({
   declarations: [
     ProductsComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    ProductsListComponent,
+    ProductFilterPipe
   ],
   imports: [
     CommonModule,
