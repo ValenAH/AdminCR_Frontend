@@ -6,12 +6,14 @@ import { CustomersRoutingModule } from './customers-routing.module'
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CustomersListComponent } from './customers-list/customers-list.component';
 
 
 @NgModule({
   declarations: [
     CreateCustomerComponent,
-    CustomersComponent
+    CustomersComponent,
+    CustomersListComponent
   ],
   imports: [
     CommonModule,

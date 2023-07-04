@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustomersComponent } from './customers.component';
+import { CreateCustomerComponent } from './create-customer/create-customer.component';
+import { CustomersListComponent } from './customers-list/customers-list.component';
 
 const routes: Routes = [
   {
     path:'',
-    component: CustomersComponent,
-    data: {
-      title: 'clientes'
-    }
+    component: CustomersListComponent
+  },
+  {
+    path: 'crear',
+    component: CreateCustomerComponent
+  },
+  {
+    path: 'editar/:id',
+    component: CreateCustomerComponent
   }
 ];
 

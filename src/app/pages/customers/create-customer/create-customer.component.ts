@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-create-customer',
@@ -7,15 +9,24 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./create-customer.component.sass']
 })
 export class CreateCustomerComponent implements OnInit {
-  createCustomerOpen: boolean = false;
-
   createCustomerForm!: FormGroup ;
+  customerId : number = 0;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.buildForm();
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router : Router,
+    private route : ActivatedRoute,
+    private customerService: CustomerService
+    ) { }
 
   ngOnInit(): void {
+    this.buildForm();
+    this.route.params.subscribe((params: Params)=>{
+      this.customerId = Number(params['id']);
+      if(this.customerId){
+        this.getCustomerById();
+      }
+    })
   }
 
   buildForm(){
@@ -23,13 +34,27 @@ export class CreateCustomerComponent implements OnInit {
       identificationType: ['', Validators.required],
       identificationNumber: ['', Validators.required],
       customerName: ['', Validators.required],
-      contactNumber: ['', Validators.required],
-      address: ['', Validators.required]
+      telephone: ['', Validators.required],
+      address: ['', Validators.required],
+      email: ['', Validators.required]
     });
   }
 
-  openComponent(){
-    this.createCustomerOpen = !this.createCustomerOpen
+  getCustomerById(){
+    this.customerService.getCustomerById(this.customerId).subscribe({
+      next: (response : any) =>{
+        this.createCustomerForm.patchValue(response.data);
+      }
+    })
   }
+
+  saveCustomer(){
+    this.customerService.saveCustomer(this.createCustomerForm.value).subscribe({
+      next: (response) => {
+
+      }
+    })
+  }
+
 
 }
