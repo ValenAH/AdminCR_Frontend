@@ -1,7 +1,9 @@
+import { IdentificationType } from './identificationType.model';
 export interface Customer {
-  customerId: number
+  id: number
+  identificationType : IdentificationType,
   identificationNumber: string,
-  customerName: string,
+  name: string,
   telephone: string,
   address: string
 }

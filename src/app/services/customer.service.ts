@@ -22,9 +22,12 @@ export class CustomerService {
 
    getCustomerById(customerId : number){
     let customer = {
-      customerId: customerId
+      Id: customerId
     }
     return this.http.post(`${this._urlApi}Customer/GetCustomerById`, customer)
+   }
+   getIdentificationType(){
+    return this.http.get(`${this._urlApi}IdentificationType/GetIdentificationType`)
    }
 
    saveCustomer(customer: Customer){
@@ -32,6 +35,6 @@ export class CustomerService {
    }
 
    updateCustomer(customer: Customer){
-    return this.http.post(`${this._urlApi}Customer/SaveCustomer`,customer)
+    return this.http.post(`${this._urlApi}Customer/UpdateCustomer`,customer)
    }
 }

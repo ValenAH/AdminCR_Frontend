@@ -6,6 +6,8 @@ import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './pages/layout/layout.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+import { CustomerFilterPipe } from './pipes/customer-filter.pipe';
+import { ProductFilterPipe } from 'src/app/pipes/product-filter.pipe';
 
 @NgModule({
   declarations: [

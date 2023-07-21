@@ -11,7 +11,6 @@ export class ProductsListComponent implements OnInit {
 
   public products : Product[] = [];
   @Input() _productsToSearch : string = '';
-  public filteredProducts : Product[] = [];
 
   constructor(
     private productService : ProductService

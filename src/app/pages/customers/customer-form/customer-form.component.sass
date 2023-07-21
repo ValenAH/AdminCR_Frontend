@@ -1,6 +1,6 @@
 @import '../../../../assets/sass/variables'
 
-input
+input,select
   color: $white
   background-color: black
   border: none
@@ -17,7 +17,10 @@ input:focus
   outline: none
   border: 1px solid $blue
 
-.createCustomerForm
+p
+  color: $white
+
+.customerForm
   position: relative
   background-color: black
   box-shadow: 0 0 30px 5px $black
@@ -52,3 +55,8 @@ input:focus
 
   &__icon::before
     background-color: black
+
+.bi-cart-check-fill::before
+  font-size: 6rem
+  color: $success
+  padding: 15px

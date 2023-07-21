@@ -3,16 +3,18 @@ import { Product } from '../../../common/models/product.model';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Category } from 'src/app/common/models/category.model';
 
 @Component({
   selector: 'app-create-product',
-  templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.sass']
+  templateUrl: './product-form.component.html',
+  styleUrls: ['./product-form.component.sass']
 })
 export class CreateProductComponent implements OnInit {
   public productForm!: FormGroup ;
   public productId: number = 0;
   public productCreated : boolean = false;
+  public categories: Category[] = []
   public message : string = '';
   constructor(
     private formBuilder: FormBuilder,
@@ -23,6 +25,7 @@ export class CreateProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.getCategories();
     this.route.params.subscribe((params: Params)=>{
       this.productId = Number(params['id']);
       if(this.productId){
@@ -33,21 +36,30 @@ export class CreateProductComponent implements OnInit {
 
   buildForm(){
     this.productForm = this.formBuilder.group({
-      productName: ['', Validators.required],
-      description: ['', Validators.required],
-      unitCost: [0, Validators.required],
-      price: [0, Validators.required]
+      name: ['', Validators.required],
+      description: [''],
+      unitCost: ['', Validators.required],
+      price: ['', Validators.required],
+      categoryId: ['',Validators.required]
     });
   }
 
-  get productName(){ return this.productForm.get('productName')};
+  get name(){ return this.productForm.get('name')};
   get description(){ return this.productForm.get('description')};
   get unitCost(){ return this.productForm.get('unitCost')};
   get price(){ return this.productForm.get('price')};
+  get categoryId(){ return this.productForm.get('category')};
 
   getProductById(){
     this.productService.getProductById(this.productId).subscribe( (response : any) =>{
       this.productForm.patchValue(response.data)
+    })
+  }
+  getCategories(){
+    this.productService.getCategories().subscribe({
+      next: (response: any)=> {
+        this.categories = response.data;
+      }
     })
   }
 
@@ -72,9 +84,17 @@ export class CreateProductComponent implements OnInit {
   }
 
   updateProduct(){
-    this.productService.updateProduct(this.productForm.value).subscribe({
+    let product ={
+      id: this.productId,
+      ...this.productForm.value
+    }
+    this.productService.updateProduct(product).subscribe({
       next: (response: any) =>{
-
+        this.productCreated = true;
+        this.message = response.header.message;
+        setTimeout(() => {
+          this.router.navigate(['/productos'])
+        }, 3000)
       }
     })
   }

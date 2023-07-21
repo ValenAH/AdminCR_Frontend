@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="customerForm rounded m-5 p-1">
+      <form [formGroup]="customerForm" *ngIf="!customerCreated" (ngSubmit)="saveForm()">
+        <div class="modal-header justify-content-center">
+          <h5 class="customerForm__title" id="createCustomerLabel">{{customerId ? 'EDITAR' : 'CREAR'}} CLIENTE</h5>
+          <button type="button" class="close m-0 p-0 border-0" [routerLink]="['/clientes']">
+            <i class="close__icon fa-regular fa-circle-xmark"></i>
+          </button>
+        </div>
+        <div class="container p-2">
+          <div class="mt-2">
+            <label for="identificationTypeId">Tipo de identificacion</label>
+            <select class="w-100" formControlName="identificationTypeId" type="text" id="identificationTypeId">
+              <option [value]="item.id" *ngFor="let item of identificationTypes">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="identificationNumber">Numero de identificacion</label>
+            <input class="w-100" formControlName="identificationNumber" type="text" id="identificationNumber">
+          </div>
+          <div class="mt-2">
+            <label for="name">Nombre</label>
+            <input class="w-100" formControlName="name" type="text" id="name">
+          </div>
+          <div class="mt-2">
+            <label for="contactNumber">Número de contacto</label>
+            <input class="w-100" formControlName="telephone" type="tel" id="contactNumber">
+          </div>
+          <div class="mt-2">
+            <label for="address">Dirección</label>
+            <input class="w-100" formControlName="address" type="text" id="address">
+          </div>
+          <div class="mt-2">
+            <label for="email">Correo electrónico</label>
+            <input class="w-100" formControlName="email" type="text" id="address">
+          </div>
+        </div>
+        <div class="text-center my-2">
+          <button class="addCustomer rounded m-4 p-2" type="submit" [disabled]="customerForm.invalid">{{customerId ? 'Editar' : 'Agregar'}} Cliente</button>
+        </div>
+      </form>
+      <div *ngIf="customerCreated">
+        <div class="m-5 text-center">
+          <i class="bi bi-cart-check-fill"></i>
+          <p>{{message}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

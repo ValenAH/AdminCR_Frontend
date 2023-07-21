@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SalesComponent } from './sales.component';
+import { SalesListComponent } from './sales-list/sales-list.component';
+import { CreateSaleComponent } from './create-sale/create-sale.component';
 
 const routes: Routes = [
   {
     path:'',
-    component: SalesComponent,
-    data: {
-      title: 'ventas'
-    }
+    component: SalesListComponent,
+  },
+  {
+    path: 'crear',
+    component: CreateSaleComponent
+  },
+  {
+    path: 'editar/:id',
+    component: CreateSaleComponent
   }
 ];
 

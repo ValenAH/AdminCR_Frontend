@@ -22,9 +22,13 @@ export class ProductService {
 
    getProductById(productId : number){
     let product = {
-      productId: productId
+      Id: productId
     }
     return this.http.post(`${this._urlApi}Product/GetProductById`, product)
+   }
+
+   getCategories(){
+    return this.http.get(`${this._urlApi}Category/GetCategories`)
    }
 
    saveProduct(product: Product){
@@ -32,7 +36,7 @@ export class ProductService {
    }
 
    updateProduct(product: Product){
-    return this.http.post(`${this._urlApi}Product/SaveProduct`,product)
+    return this.http.post(`${this._urlApi}Product/UpdateProduct`,product)
    }
 
 }

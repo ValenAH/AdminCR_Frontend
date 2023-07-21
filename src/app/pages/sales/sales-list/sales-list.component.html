@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-around align-items-center">
+  <app-searchbar (searchTextChanged)="searchText($event)" class="col-lg-6 col-md-7"></app-searchbar>
+    <button type="button" class="createSale rounded m-3" routerLink="crear">
+      Crear venta
+    </button>
+</div>
+<section>
+  <div class="row">
+    <div class="col">
+      <table class="table rounded mt-1">
+        <thead>
+          <tr>
+            <th scope="col">FECHA VENTA</th>
+            <th scope="col">CONSECUTIVO</th>
+            <th scope="col">IDENTIFICACIÓN</th>
+            <th scope="col">CLIENTE</th>
+            <th scope="col">FECHA ENTREGA</th>
+            <th scope="col">VALOR TOTAL</th>
+            <th scope="col">ESTADO</th>
+            <th scope="col">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sale of sales">
+            <td class="sale__saleDate ms-2">{{sale.saleDate | date: 'dd.MM.yyyy'}}</td>
+            <td class="sale__consecutive ms-2">{{sale.consecutive}}</td>
+            <td>{{sale.customer.identificationNumber}}</td>
+            <td class="ps-2">{{sale.customer.name}}</td>
+            <td class="sale__deliveryDate ms-2">{{sale.deliveryDate | date: 'dd.MM.yyyy'}}</td>
+            <td class="sale__paymentMethod ms-2"></td>
+            <td class="sale__orderStatus ms-2">{{sale.saleStatus.status}}</td>
+            <td>
+              <button class="btn-actions ps-0" >
+                <img class="btn-actions__icons" src="../assets/general/edit.svg" alt="">
+              </button>
+              <button class="btn-actions">
+                <img class="btn-actions__icons" src="../assets/general/invoice.svg" alt="">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+

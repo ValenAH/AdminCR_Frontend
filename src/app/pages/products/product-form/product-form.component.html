@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <div class="container">
-    <div class="createProductForm rounded m-5">
+    <div class="productForm rounded m-5 p-1">
       <form [formGroup]="productForm"  (ngSubmit)="saveForm()" *ngIf="!productCreated">
         <div class="modal-header justify-content-center">
-          <h5 class="createProductForm__title" id="createProductLabel">{{ productId ? 'EDITAR': 'CREAR'}} PRODUCTO</h5>
+          <h5 class="productForm__title" id="productLabel">{{ productId ? 'EDITAR': 'CREAR'}} PRODUCTO</h5>
           <button type="button" class="close m-0 p-0 border-0" [routerLink]="['/productos']">
             <i class="close__icon fa-regular fa-circle-xmark"></i>
           </button>
@@ -12,19 +12,25 @@
           <div class="p-2">
             <div class="mt-2">
               <label for="productName">Nombre</label>
-              <input class="w-100" formControlName="productName" type="text" id="productName" required>
+              <input class="w-100" formControlName="name" type="text" id="name">
             </div>
             <div class="mt-2">
               <label for="description">Descripcion</label>
-              <input class="w-100" formControlName="description" type="text" id="description" required>
+              <input class="w-100" formControlName="description" type="text" id="description">
             </div>
             <div class="mt-2">
               <label for="unitCost">Costo</label>
-              <input class="w-100" formControlName="unitCost" type="number" id="unitCost" min="280" required>
+              <input class="w-100" formControlName="unitCost" type="number" id="unitCost" min="0">
             </div>
             <div class="mt-2">
               <label for="price">Precio</label>
-              <input class="w-100" formControlName="price" type="number" id="price" min="280" required>
+              <input class="w-100" formControlName="price" type="number" id="price" min="0">
+            </div>
+            <div class="mt-2">
+              <label for="price">Categoría</label>
+              <select class="w-100" formControlName="categoryId" id="category">
+                <option [value]="category.id" *ngFor="let category of categories">{{category.name}}</option>
+              </select>
             </div>
           </div>
           <div class="text-center my-2">
@@ -35,7 +41,8 @@
       </form>
       <div *ngIf="productCreated">
         <div class="m-5 text-center">
-          <p class="m-5">{{message}}</p>
+          <i class="bi bi-cart-check-fill"></i>
+          <p>{{message}}</p>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Customer } from 'src/app/common/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
 
@@ -9,7 +9,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class CustomersListComponent implements OnInit {
   public customers : Customer[] = [];
-
+  @Input() _customersToSearch: string = '';
   constructor(
     private customerService : CustomerService
   ) { }
@@ -25,5 +25,10 @@ export class CustomersListComponent implements OnInit {
       }
     })
   }
+
+  searchText(text: string){
+    this._customersToSearch = text;
+  }
+  get textToSearch(){ return this._customersToSearch.toUpperCase() }
 
 }

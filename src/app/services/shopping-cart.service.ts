@@ -17,6 +17,19 @@ export class ShoppingCartService {
 
   addProduct(product: Product){
     this.shoppingCart.push(product);
+    return this.shoppingCart
+  }
+  removeProduct(productId: number){
+    console.log('carrito de compras',this.shoppingCart);
+    for(let i = 0; i< this.shoppingCart.length; i++){
+      if(this.shoppingCart[i].id === productId ){
+        let removido = this.shoppingCart.splice(i,1);
+        console.log('removido', removido)
+        break
+      }
+
+    }
+    return this.shoppingCart
   }
 
   getTotal(){

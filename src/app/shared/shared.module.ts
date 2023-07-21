@@ -7,7 +7,7 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
 import { PreloaderComponent } from './preloader/preloader.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { ProductFilterPipe } from 'src/app/pipes/product-filter.pipe';
 
 
 @NgModule({
@@ -16,7 +16,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     SidebarComponent,
     SearchbarComponent,
     PreloaderComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    ProductFilterPipe
   ],
   imports: [
     CommonModule,
@@ -29,7 +30,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     NavbarComponent,
     SearchbarComponent,
     PreloaderComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    ProductFilterPipe
   ]
 })
 export class SharedModule { }
