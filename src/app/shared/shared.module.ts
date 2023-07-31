@@ -8,6 +8,7 @@ import { PreloaderComponent } from './preloader/preloader.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProductFilterPipe } from 'src/app/pipes/product-filter.pipe';
+import { OrderPanelComponent } from '../pages/sales/create-sale/order-panel/order-panel.component';
 
 
 @NgModule({

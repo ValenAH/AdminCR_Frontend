@@ -1,0 +1,42 @@
+<section class="container-fluid">
+  <div class="container">
+    <h2 class="text-center">REGISTRAR PAGO</h2>
+    <hr>
+    <form [formGroup]="payments" (ngSubmit)="savePayment()">
+        <div formArrayName="payment" *ngFor="let payment of paymentField.controls; let i = index">
+          <div class="row align-items-end m-3" [formGroupName]="i">
+            <div class="col-1">
+              <a class="p-1" (click)="removePaymentField(i)">
+                <i class="bi bi-dash-circle-fill"></i>
+              </a>
+            </div>
+            <div class="col-lg-3">
+              <label for="">Fecha de pago</label>
+              <input class="w-100 p-1" formControlName="date" type="date">
+            </div>
+            <div class="col-lg-4">
+              <label for="">Método de pago</label>
+              <select class="w-100 p-1" formControlName="paymentMethodId" id="">
+                <option [value]="paymentMethod.id" *ngFor="let paymentMethod of paymentMethods">{{paymentMethod.name}}</option>
+              </select>
+            </div>
+            <div class="col-lg-4">
+              <label for="">Monto</label>
+              <input class="w-100 p-1" formControlName="amount" type="text">
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="m-3 ps-3">
+          <a class="d-flex align-items-center text-decoration-none text-dark" (click)="addPaymentField()">
+            <i class="bi bi-plus-circle-fill"></i>
+            <span class="px-2">Agregar método de pago</span>
+          </a>
+        </div>
+
+        <div class="text-center">
+          <button class="savePayment rounded-1" type="submit">Guardar pago</button>
+        </div>
+    </form>
+  </div>
+</section>

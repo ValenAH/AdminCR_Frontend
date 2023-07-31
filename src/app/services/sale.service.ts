@@ -21,4 +21,7 @@ export class SaleService {
    getSaleDetails(saleId : number){
     return this.http.post(`${this._urlApi}SaleDetails/getSaleDetails`,saleId)
    }
+   getPaymentMethod(){
+    return this.http.get(`${this._urlApi}PaymentMethod/GetPaymentMethods`)
+   }
 }

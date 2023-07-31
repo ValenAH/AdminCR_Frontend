@@ -1,0 +1,67 @@
+@import '../../../../../assets/sass/variables'
+@import '../../../../../assets/fonts/font'
+
+input,select
+  color: $white
+  background-color: black
+  border: none
+  border-bottom: 1px solid $blue
+  padding: 5px
+  margin-y: 10px
+  font-size: 1rem
+  text-align: right
+
+input::placeholder
+  color: $blue
+  font-size: 1rem
+
+input:focus
+  outline: none
+  border: 1px solid $blue
+  border-radius: 5px
+
+th
+  text-align: center
+
+td
+  font-size: 1rem
+  width: 5rem
+  text-align: right
+
+.product
+
+  &__productName
+    width: 120px
+    white-space: nowrap
+
+  &__quantity
+    width: 50px
+
+  &__amount
+    width: 100px
+
+  &__discount
+    width: 80px
+
+  &__tax
+    width: 80px
+
+  &__btn-action
+    background-color: transparent
+    border: none
+    width: 30px
+
+    img
+      width: 30px
+      height: 30px
+      color: $blue
+
+    &:hover
+      transform: scale(1.1)
+
+.addSale
+  border: none
+  background-color: $blue
+
+  &:hover
+    background-color: #97d3fb

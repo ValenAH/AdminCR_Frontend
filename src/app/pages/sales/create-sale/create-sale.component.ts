@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Product } from '../../../common/models/product.model';
 import { ShoppingCartService } from '../../../services/shopping-cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from 'src/app/common/models/customer.model';
+import { SaleDetails } from 'src/app/common/models/saleDetails.models';
+import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
 
 @Component({
   selector: 'app-create-sale',
@@ -15,10 +17,10 @@ export class CreateSaleComponent implements OnInit {
   @Input() _productsToSearch : string = '';
   createCustomer: boolean = false;
   productAdded: boolean = false;
-  saleForm!: FormGroup ;
+  saleForm!: FormGroup;
   products: Product[] = [];
   customers: Customer[] = [];
-  shoppingCart: Array<Product> = [];
+  shoppingCart: ShoppingCart[] = [];
   totalSale: number= 0;
 
   constructor(private formBuilder: FormBuilder,
@@ -34,18 +36,14 @@ export class CreateSaleComponent implements OnInit {
     this.getProducts();
     this.getCustomers();
   }
-
   buildSaleForm(){
     this.saleForm = this.formBuilder.group({
-      customerName: ['', Validators.required],
+      consecutive: ['', Validators.required],
+      customerId: ['', Validators.required],
       deliveryDate: ['', Validators.required],
-      productsList: [[], Validators.required]
-    });
+      statusId: [1]
+    })
   }
-
-  get customerName(){ return this.saleForm.get('customerName');}
-  get deliveryDate(){ return this.saleForm.get('deliveryDate');}
-  get productsList(){ return this.saleForm.get('products');}
 
   getProducts(){
     this.productService.getProducts().subscribe({
@@ -70,12 +68,27 @@ export class CreateSaleComponent implements OnInit {
     if(!this.productAdded)
       this.productAdded = true
 
-    this.shoppingCart = this.shoppingCartService.addProduct(product);
-    this.totalSale = this.shoppingCartService.getTotal();
+    let item = {
+      productId: product.id,
+      productName: product.name,
+      productDescription: product.description,
+      amount: product.price,
+      quantity: 1,
+      discount: null,
+      tax: null
+
+    }
+    this.shoppingCart = this.shoppingCartService.addProduct(item);
+    this.shoppingCartService.sendTotal();
   }
-  removeFromCart(productId: number){
-    this.shoppingCart = this.shoppingCartService.removeProduct(productId);
-    if(this.shoppingCart.length === 0)
-      this.productAdded = false;
+  createCustomerModal(){
+    this.createCustomer = true;
+  }
+  closeModal(event: boolean){
+    this.createCustomer = event;
+    this.getCustomers();
+  }
+  closePanel(e : boolean){
+    this.productAdded = e;
   }
 }
