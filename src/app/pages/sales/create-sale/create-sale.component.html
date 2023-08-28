@@ -67,7 +67,7 @@
       </div>
     </div>
     <div *ngIf="productAdded" class="orderPanel bg-dark text-light p-2 rounded-2" [ngClass]="{'active': !productAdded}">
-      <app-order-panel (productAdded)="closePanel($event)"></app-order-panel>
+      <app-order-panel (productAdded)="closePanel($event)" [saleForm]="saleForm"></app-order-panel>
     </div>
   </div>
 </section>

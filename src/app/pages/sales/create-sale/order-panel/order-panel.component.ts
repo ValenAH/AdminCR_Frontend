@@ -1,8 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, SimpleChanges, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { SaleDetails } from 'src/app/common/models/saleDetails.models';
 import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { SaleService } from '../../../../services/sale.service';
+import { Sale } from 'src/app/common/models/sale.model';
 
 @Component({
   selector: 'app-order-panel',
@@ -10,6 +12,7 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
   styleUrls: ['./order-panel.component.sass']
 })
 export class OrderPanelComponent implements OnInit {
+  @Input() saleForm !: FormGroup;
   @Output() productAdded : EventEmitter<boolean> = new EventEmitter();
   saleDetails!: FormGroup ;
   shoppingCart : ShoppingCart[] = [];
@@ -17,6 +20,7 @@ export class OrderPanelComponent implements OnInit {
   totalQuantity : number = 0;
   constructor(
     private shoppingCartService: ShoppingCartService,
+    private saleService: SaleService
   ) {
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
   }
@@ -43,12 +47,12 @@ export class OrderPanelComponent implements OnInit {
   }
 
   changes(){
-    console.log('cambio')
     this.totalSale = this.shoppingCartService.getTotal();
     this.totalQuantity = this.shoppingCartService.getTotalQuantity();
   }
 
   saveSaleInformation(){
+    //saving sale details
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
     let string = JSON.stringify(this.shoppingCart)
     let saleDetails = JSON.parse(string);
@@ -56,8 +60,16 @@ export class OrderPanelComponent implements OnInit {
       delete product.productName;
       delete product.productDescription;
     })
-    console.log('Carrito de compras', this.shoppingCart)
-    console.log('Objeto', saleDetails)
+    let sale: Sale = {
+      ...this.saleForm.value,
+      saleDetails
+    };
+    // this.saleService.saveSale(sale).subscribe({
+    //   next: ()=> {
+
+    //   }
+    // })
+    console.log('Objeto', sale)
   }
 
 

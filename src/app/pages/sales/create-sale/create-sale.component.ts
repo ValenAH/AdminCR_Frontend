@@ -38,7 +38,6 @@ export class CreateSaleComponent implements OnInit {
   }
   buildSaleForm(){
     this.saleForm = this.formBuilder.group({
-      consecutive: ['', Validators.required],
       customerId: ['', Validators.required],
       deliveryDate: ['', Validators.required],
       statusId: [1]

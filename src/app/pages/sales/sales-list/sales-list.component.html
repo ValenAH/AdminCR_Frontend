@@ -17,7 +17,8 @@
             <th scope="col">FECHA ENTREGA</th>
             <th scope="col">VALOR TOTAL</th>
             <th scope="col">ESTADO</th>
-            <th scope="col">ACCIONES</th>
+            <th class="text-center" scope="col">DETALLE</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -27,12 +28,14 @@
             <td>{{sale.customer.identificationNumber}}</td>
             <td class="ps-2">{{sale.customer.name}}</td>
             <td class="sale__deliveryDate ms-2">{{sale.deliveryDate | date: 'dd.MM.yyyy'}}</td>
-            <td class="sale__paymentMethod ms-2"></td>
+            <td class="sale__totalAmount ms-2">$ {{sale.totalAmount | number}}</td>
             <td class="sale__orderStatus ms-2">{{sale.saleStatus.status}}</td>
-            <td>
-              <button class="btn-actions ps-0" >
-                <img class="btn-actions__icons" src="../assets/general/edit.svg" alt="">
+            <td class="text-center">
+              <button class="btn-actions ps-0" routerLink="detalle/{{sale.id}}">
+                <i class="bi bi-eye"></i>
               </button>
+            </td>
+            <td>
               <button class="btn-actions">
                 <img class="btn-actions__icons" src="../assets/general/invoice.svg" alt="">
               </button>

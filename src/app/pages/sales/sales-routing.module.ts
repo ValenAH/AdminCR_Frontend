@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SalesListComponent } from './sales-list/sales-list.component';
 import { CreateSaleComponent } from './create-sale/create-sale.component';
 import { PaymentComponent } from './payment/payment.component';
+import { SaleDetailsComponent } from './sale-details/sale-details.component';
 
 const routes: Routes = [
   {
@@ -14,8 +15,8 @@ const routes: Routes = [
     component: CreateSaleComponent
   },
   {
-    path: 'editar/:id',
-    component: CreateSaleComponent
+    path: 'detalle/:id',
+    component: SaleDetailsComponent
   },
   {
     path: 'crear/registrar-pago',
