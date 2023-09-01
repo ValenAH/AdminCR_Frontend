@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateCustomerComponent } from './customer-form/customer-form.component';
 import { CustomersListComponent } from './customers-list/customers-list.component';
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'editar/:id',
     component: CreateCustomerComponent
+  },
+  {
+    path: 'historial',
+    component: HistoryComponent
   }
 ];
 

@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomersListComponent } from './customers-list/customers-list.component';
 import { CustomerFilterPipe } from 'src/app/pipes/customer-filter.pipe';
+import { HistoryComponent } from './history/history.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CustomerFilterPipe } from 'src/app/pipes/customer-filter.pipe';
     CreateCustomerComponent,
     CustomersComponent,
     CustomersListComponent,
-    CustomerFilterPipe
+    CustomerFilterPipe,
+    HistoryComponent
   ],
   imports: [
     CommonModule,
