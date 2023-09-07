@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { SearchbarService } from '../../services/searchbar.service';
+import { Sale } from '../../common/models/sale.model';
 
 @Component({
   selector: 'app-sales',
@@ -8,9 +8,11 @@ import { SearchbarService } from '../../services/searchbar.service';
 })
 export class SalesComponent implements OnInit {
 
+  today = new Date();
+  date = new Date(2021, 1, 21);
 
   constructor(
-    private searchbarService: SearchbarService
+
   ) { }
 
   ngOnInit(): void {

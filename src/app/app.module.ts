@@ -4,8 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './pages/layout/layout.module';
-import { HttpClientModule } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,9 +15,19 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
     LayoutModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [CookieService],
+  providers: [
+  //   {
+
+  //   provide: HTTP_INTERCEPTORS,
+
+  //   useClass: AuthInterceptorService,
+
+  //   multi: true
+
+  // }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

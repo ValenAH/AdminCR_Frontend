@@ -11,8 +11,7 @@ import { SalesModule } from '../sales/sales.module';
   ],
   imports: [
     CommonModule,
-    SharedModule,
-    SalesModule
+    SharedModule
   ]
 })
 export class HomeModule { }

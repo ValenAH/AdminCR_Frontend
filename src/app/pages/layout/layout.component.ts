@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
   selector: 'app-layout',
@@ -6,16 +7,21 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.sass']
 })
 export class LayoutComponent implements OnInit {
+  showSidebar: boolean = false;
 
 
-
-  constructor() { }
+  constructor(
+    private sidebarService: SidebarService
+  ) { }
 
   ngOnInit(): void {
+    this.getSidebarAction();
   }
 
-  sideNavStatus(e: any){
-    console.log('Soy el evento del header'+ e)
+  getSidebarAction(){
+    this.sidebarService.sidebarAction$.subscribe(action =>{
+      this.showSidebar = action;
+    });
   }
 
   userLogged(e: any){

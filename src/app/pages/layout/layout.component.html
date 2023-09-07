@@ -1,7 +1,7 @@
 <div>
-  <app-navbar (userLogged)="userLogged($event)" (sideNavButton)="sideNavStatus($event)"></app-navbar>
-  <app-sidebar class="py-2" [ngClass]="{'side-nav-open': sideNavStatus}"></app-sidebar>
-    <div class="display-area p-1" [ngClass]="{'display-area-shrink': sideNavStatus}">
-      <router-outlet></router-outlet>
-    </div>
+  <app-navbar (userLogged)="userLogged($event)"></app-navbar>
+  <app-sidebar class="py-2" [ngClass]="{'active': showSidebar}"></app-sidebar>
+  <div class="display-area p-1" [ngClass]="{'active': !showSidebar}">
+    <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateCustomerComponent } from './create-customer/create-customer.component';
+import { CreateCustomerComponent } from './customer-form/customer-form.component';
 import { CustomersComponent } from './customers.component';
 import { CustomersRoutingModule } from './customers-routing.module'
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CustomersListComponent } from './customers-list/customers-list.component';
+import { CustomerFilterPipe } from 'src/app/pipes/customer-filter.pipe';
+import { HistoryComponent } from './history/history.component';
 
 
 @NgModule({
   declarations: [
     CreateCustomerComponent,
-    CustomersComponent
+    CustomersComponent,
+    CustomersListComponent,
+    CustomerFilterPipe,
+    HistoryComponent
   ],
   imports: [
     CommonModule,

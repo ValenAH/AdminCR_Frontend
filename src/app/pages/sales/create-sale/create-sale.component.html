@@ -1,64 +1,73 @@
-<button type="button" class="createSale rounded m-3"  (click)="openComponent()">
-  Crear pedido
-</button>
-
-<form [formGroup]="createSaleForm" class="createSaleForm rounded" *ngIf="createSaleOpen">
-  <div class="modal-header justify-content-center">
-    <h5 class="createSaleForm__title" id="createSaleLabel">CREAR PEDIDO</h5>
-    <button type="button" class="close m-0 p-0" (click)="openComponent()">
-      <i class="close__icon fa-regular fa-circle-xmark"></i>
-    </button>
-  </div>
-  <div class="container p-2">
-    <div class="mt-2">
-      <label for="customerName">Cliente</label>
-      <input class="w-100" formControlName="customerName" type="text" id="customerName" required>
-    </div>
-    <div class="mt-2">
-      <label for="deliveryDate">Fecha de entrega</label>
-      <input class="date w-100" formControlName="deliveryDate" type="date" id="deliveryDate" required>
-    </div>
-    <div class="my-4">
-      <app-searchbar (keyup)="filterProducts($event)"></app-searchbar>
-    </div>
-    <div>
-      <section>
-        <div class="row">
-          <div class="col">
-            <table class="table rounded mt-2">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">PRODUCTO</th>
-                  <th scope="col">DESCRIPCIÓN</th>
-                  <th scope="col">CANTIDAD</th>
-                  <th scope="col">PRECIO</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let product of filteredProducts; index as i" class="product">
-                  <td>
-                    <input type="checkbox" (click)="selectProducts(product, i)">
-                  </td>
-                  <td class="product__productName ms-2">{{product.productName}}</td>
-                  <td class="product__productDescription ms-2">{{product.description}}</td>
-                  <td class="product__productQuantity ms-2">
-                    <input class="product__productQuantity--inputQuantity" type="text">
-                  </td>
-                  <td class="product__productPrice ms-2">{{product.price}}</td>
-                </tr>
-              </tbody>
-            </table>
+<section class="container-fluid">
+  <div class="container d-flex">
+    <div class="createSale" [ngClass]="{'active': productAdded}">
+      <div class="sale p-2">
+        <form [formGroup]="saleForm" class="createSaleForm rounded">
+          <div class="modal-header justify-content-center position-relative">
+            <button type="button" class="close border-0 m-0 p-0" [routerLink]="['/ventas']">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <h2 class="saleForm__title" id="createSaleLabel">CREAR VENTA</h2>
           </div>
-        </div>
-      </section>
+          <div class="row mt-2 align-items-end">
+            <div class="col-lg-7 col-md-8">
+              <label for="customerName">Cliente</label>
+              <input class="form-control" formControlName="customerId" list="customers" type="text" id="customerName">
+              <datalist id="customers">
+                <option [value]="customer.name" *ngFor="let customer of customers"></option>
+              </datalist>
+            </div>
+              <div class="col-lg-2 col-md-4">
+                <div class="w-100">
+                  <button class="createCustomer rounded py-1 px-3 my-1" (click)="createCustomerModal()">
+                    <h5>Crear cliente</h5>
+                  </button>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-12">
+                <label for="deliveryDate">Fecha de entrega</label>
+                <input class="form-control" formControlName="deliveryDate" type="date" id="deliveryDate" required>
+              </div>
+            </div>
+            <div *ngIf="createCustomer">
+              <app-create-customer (closeCustomerModal)="closeModal($event)"></app-create-customer>
+            </div>
+            <div class="row">
+              <div class="col my-4">
+                <app-searchbar (searchTextChanged)="searchText($event)"></app-searchbar>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <table class="table rounded mt-2">
+                  <thead>
+                    <tr>
+                      <th scope="col">PRODUCTO</th>
+                      <th scope="col">DESCRIPCIÓN</th>
+                      <th scope="col">PRECIO</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of products | productFilter: textToSearch; index as i" class="product">
+                      <td class="product__productName ms-2">{{product.name}}</td>
+                      <td class="product__productDescription ms-2">{{product.description}}</td>
+                      <td class="product__productPrice ms-2">$ {{product.price}}</td>
+                      <td>
+                        <button class="product__btn-action" (click)="addToCart(product)">
+                          <img src="../../../../assets/general/plus.svg" alt="">
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </form>
+      </div>
     </div>
-    <div>
-      <label for="totalAmount">Total</label>
-      <input class="w-100" formControlName="totalAmount" type="number" id="totalAmount" required readonly>
+    <div *ngIf="productAdded" class="orderPanel bg-dark text-light p-2 rounded-2" [ngClass]="{'active': !productAdded}">
+      <app-order-panel (productAdded)="closePanel($event)" [saleForm]="saleForm"></app-order-panel>
     </div>
   </div>
-  <div class="text-center m-4">
-    <button class="addSale rounded m-2 p-2" type="button">Agregar Pedido</button>
-  </div>
-</form>
+</section>

@@ -10,7 +10,7 @@ import { SidebarService } from '../../services/sidebar.service';
 export class NavbarComponent implements OnInit {
   userLogged: string = '';
   sidebarButton: boolean = false;
-  menuStatus: boolean = false;
+  menuStatus: boolean = true;
 
   constructor(
     private authService: AuthService,

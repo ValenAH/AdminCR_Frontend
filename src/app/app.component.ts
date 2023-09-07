@@ -4,7 +4,6 @@ Router,
 Event as RouterEvent,
 NavigationStart,
 NavigationEnd,
-NavigationError,
 NavigationCancel } from '@angular/router';
 
 @Component({

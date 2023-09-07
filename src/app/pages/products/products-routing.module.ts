@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductsComponent } from './products.component';
+import { ProductsListComponent } from './products-list/products-list.component';
+import { CreateProductComponent } from './product-form/product-form.component';
 
 const routes: Routes = [
   {
     path:'',
-    component: ProductsComponent,
-    data: {
-      title: 'productos'
-    }
+    component: ProductsListComponent,
+  },
+  {
+    path: 'crear',
+    component: CreateProductComponent
+  },
+  {
+    path: 'editar/:id',
+    component: CreateProductComponent
   }
 ];
 

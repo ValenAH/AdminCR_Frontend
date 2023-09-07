@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="productForm rounded m-5 p-1">
+      <form [formGroup]="productForm"  (ngSubmit)="saveForm()" *ngIf="!productCreated">
+        <div class="modal-header justify-content-center">
+          <h5 class="productForm__title" id="productLabel">{{ productId ? 'EDITAR': 'CREAR'}} PRODUCTO</h5>
+          <button type="button" class="close m-0 p-0 border-0" [routerLink]="['/productos']">
+            <i class="close__icon fa-regular fa-circle-xmark"></i>
+          </button>
+        </div>
+        <div class="container">
+          <div class="p-2">
+            <div class="mt-2">
+              <label for="productName">Nombre</label>
+              <input class="w-100" formControlName="name" type="text" id="name">
+            </div>
+            <div class="mt-2">
+              <label for="description">Descripcion</label>
+              <input class="w-100" formControlName="description" type="text" id="description">
+            </div>
+            <div class="mt-2">
+              <label for="unitCost">Costo</label>
+              <input class="w-100" formControlName="unitCost" type="number" id="unitCost" min="0">
+            </div>
+            <div class="mt-2">
+              <label for="price">Precio</label>
+              <input class="w-100" formControlName="price" type="number" id="price" min="0">
+            </div>
+            <div class="mt-2">
+              <label for="price">Categoría</label>
+              <select class="w-100" formControlName="categoryId" id="category">
+                <option [value]="category.id" *ngFor="let category of categories">{{category.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="text-center my-2">
+            <button class="addProduct rounded m-2 p-2" type="submit" [disabled]="productForm.invalid">
+              {{ productId ? 'Editar': 'Agregar'}}  producto</button>
+          </div>
+        </div>
+      </form>
+      <div *ngIf="productCreated">
+        <div class="m-5 text-center">
+          <i class="bi bi-cart-check-fill"></i>
+          <p>{{message}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

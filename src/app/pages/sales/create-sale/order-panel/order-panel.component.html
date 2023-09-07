@@ -1,0 +1,48 @@
+<section>
+  <h3 class="text-light text-center mt-1">PEDIDO</h3>
+  <hr class="text-light">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Descuento</th>
+        <th>Impuesto</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="product" *ngFor="let item of shoppingCart">
+        <td>
+          <button class="product__btn-action" (click)="removeFromCart(item.productId)">
+            <img src="../../../../assets/general/minus.svg" alt="">
+          </button>
+        </td>
+        <td class="product__productName px-4">{{item.productName}}</td>
+        <td>{{item.productDescription}}</td>
+        <td><input class="product__quantity" type="number" min="0" [(ngModel)]="item.quantity" (change)="changes()"></td>
+        <td><input class="product__amount text-right" type="text" [(ngModel)]="item.amount" (change)="changes()"></td>
+        <td><input class="product__discount" type="text" [(ngModel)]="item.discount" (change)="changes()"></td>
+        <td><input class="product__tax" type="text" [(ngModel)]="item.tax" (change)="changes()"></td>
+        <td class="mx-2">{{item.quantity*item.amount | number}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="text-light">
+  <div class="d-flex justify-content-between">
+    <h4>Cantidad de productos</h4>
+    <p class="result">{{totalQuantity}}</p>
+  </div>
+  <div class="d-flex justify-content-between">
+    <h4>Total</h4>
+    <p class="result">${{totalSale | number}}</p>
+  </div>
+  <div class="text-center m-4">
+    <button class="addSale rounded m-2 p-2" type="button" (click)="saveSaleInformation()">Guardar Pedido</button>
+    <button class="addSale rounded m-2 p-2" type="button" routerLink="registrar-pago">Facturar</button>
+  </div>
+</section>

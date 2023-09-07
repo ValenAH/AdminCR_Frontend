@@ -1,0 +1,43 @@
+<section>
+  <div class="col-lg-12 col-md-12 d-flex justify-content-around align-items-center">
+    <app-searchbar (searchTextChanged)="searchText($event)" class="col-lg-6 col-md-7"></app-searchbar>
+    <button type="button" class="createCustomer rounded m-3" routerLink="crear">
+      Crear cliente
+    </button>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table rounded mt-1">
+        <thead>
+          <tr>
+            <th scope="col">IDENTIFICACIÓN</th>
+            <th scope="col">NÚMERO</th>
+            <th scope="col">CLIENTE</th>
+            <th scope="col">CONTACTO</th>
+            <th scope="col">DIRECCIÓN</th>
+            <th scope="col">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers | customerFilter : textToSearch" class="customer">
+            <td class="customer__customerName ms-2">{{customer.identificationType.name}}</td>
+            <td class="customer__customerName ms-2">{{customer.identificationNumber}}</td>
+            <td class="customer__customerDescription ms-2">{{customer.name}}</td>
+            <td class="customer__customerCost ms-2">{{customer.telephone}}</td>
+            <td class="customer__customerPrice ms-2">{{customer.address}}</td>
+            <td>
+              <a routerLink="editar/{{customer.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" class="btn-actions p-2">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+              <a routerLink="historial" data-toggle="tooltip" title="Historial" class="btn-actions p-2">
+                <i class="bi bi-newspaper"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+

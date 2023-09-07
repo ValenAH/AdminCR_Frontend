@@ -6,7 +6,7 @@ import { CustomersComponent } from './pages/customers/customers.component';
 import { SalesComponent } from './pages/sales/sales.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { UsersComponent } from './pages/users/users.component';
-import { AppVigilantGuard } from './app-vigilant.guard';
+import { AuthGuard } from './app-vigilant.guard';
 
 const routes: Routes = [
 {
@@ -20,13 +20,13 @@ const routes: Routes = [
 {
   path: '',
   component: LayoutComponent,
-  canActivate: [AppVigilantGuard],
+  // canActivate: [AuthGuard],
   data: { title: 'Inicio' },
   children: [
     {
       path: 'inicio',
       component: HomeComponent,
-      canActivate: [AppVigilantGuard],
+      // canActivate: [AuthGuard],
       loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
       data: {
         title: 'Inicio'
