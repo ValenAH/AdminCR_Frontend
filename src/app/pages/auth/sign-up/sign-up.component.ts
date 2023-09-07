@@ -2,9 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { RequestStatus } from 'src/app/common/models/request-status.model';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',

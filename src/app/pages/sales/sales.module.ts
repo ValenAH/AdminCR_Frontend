@@ -11,7 +11,6 @@ import { CreateCustomerComponent } from './create-sale/create-customer/create-cu
 import { SaleDetailsComponent } from './sale-details/sale-details.component';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderPanelComponent } from './create-sale/order-panel/order-panel.component';
-import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -29,8 +28,7 @@ import { MatSelectModule } from '@angular/material/select';
     SalesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule,
-    MatSelectModule
+    SharedModule
   ],
   exports: [
     CreateSaleComponent
