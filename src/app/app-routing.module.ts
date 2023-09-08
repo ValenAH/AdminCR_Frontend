@@ -6,7 +6,10 @@ import { CustomersComponent } from './pages/customers/customers.component';
 import { SalesComponent } from './pages/sales/sales.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { UsersComponent } from './pages/users/users.component';
-import { AuthGuard } from './app-vigilant.guard';
+import { AccountingComponent } from './pages/accounting/accounting.component';
+import { AuthGuard } from './guards/app-vigilant.guard';
+import { PortfolioComponent } from './pages/portfolio/portfolio.component';
+import { IsLoggedInGuard } from './guards/is-logged-in.guard';
 
 const routes: Routes = [
 {
@@ -15,13 +18,13 @@ const routes: Routes = [
   pathMatch:'full'
 },
 {
-  path: 'iniciar-sesion', loadChildren: () => import('./pages/auth/sign-up/sign-up.module').then(m => m.SignUpModule)
+  path: 'iniciar-sesion', 
+  loadChildren: () => import('./pages/auth/sign-up/sign-up.module').then(m => m.SignUpModule)
 },
 {
   path: '',
   component: LayoutComponent,
-  // canActivate: [AuthGuard],
-  data: { title: 'Inicio' },
+  // canLoad: [AuthGuard],
   children: [
     {
       path: 'inicio',
@@ -65,8 +68,24 @@ const routes: Routes = [
       }
     },
     {
+      path: 'cartera',
+      component: PortfolioComponent,
+      loadChildren: () => import('./pages/portfolio/portfolio.module').then(m => m.PortfolioModule),
+      data: {
+        title: 'Cartera'
+      }
+    },
+    {
+      path: 'contabilidad',
+      component: AccountingComponent,
+      loadChildren: () => import('./pages/accounting/accounting.module').then(m => m.AccountingModule),
+      data: {
+        title: 'Contabilidad'
+      }
+    },
+    {
       path: 'reportes',
-      component: SalesComponent,
+      component: AccountingComponent,
       loadChildren: () => import('./pages/customers/customers.module').then(m => m.CustomersModule),
       data: {
         title: 'Reportes'

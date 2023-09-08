@@ -9,6 +9,7 @@ export class AuthService {
   private _urlApi: string;
   private user = new BehaviorSubject<string>('');
   public userLogged$ = this.user.asObservable();
+  isLoggedIn$: Observable<boolean> = this.userLogged$.pipe(map(Boolean))
 
   constructor(
     private http: HttpClient

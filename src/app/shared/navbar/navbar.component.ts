@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { SidebarService } from '../../services/sidebar.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -30,6 +32,10 @@ export class NavbarComponent implements OnInit {
     this.authService.userLogged$.subscribe(user =>{
       this.userLogged = user;
     });
+  }
+
+  logout(){
+    this.router.navigateByUrl('/inicio')
   }
 
 }

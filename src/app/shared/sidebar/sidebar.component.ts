@@ -48,6 +48,12 @@ export class SidebarComponent implements OnInit {
     },
     {
       number: '7',
+      name: 'Contabilidad',
+      path: '/contabilidad',
+      icon: 'bi bi-kanban-fill'
+    },
+    {
+      number: '8',
       name: 'Reportes',
       path: '/reportes',
       icon: 'icon fa-solid fa-chart-column'

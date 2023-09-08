@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
 
 
 @Injectable({
@@ -19,6 +19,7 @@ export class AuthGuard implements CanActivate {
 
     return this.authService.validateToken().pipe(
       tap(isAuth => {
+        console.log('está loggeado', isAuth)
         if(!isAuth){
           localStorage.removeItem('token');
           this.router.navigateByUrl('iniciar-sesion');
