@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Product } from '../../../common/models/product.model';
 import { ShoppingCartService } from '../../../services/shopping-cart.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -20,6 +20,10 @@ export class CreateSaleComponent implements OnInit {
   saleForm!: FormGroup;
   products: Product[] = [];
   customers: Customer[] = [];
+  identificationNumber = new FormControl();
+  customerName = new FormControl();
+  enableIdentificationNumber : boolean = false;
+  enableCustomerName: boolean = false;
   shoppingCart: ShoppingCart[] = [];
   totalSale: number= 0;
 
@@ -40,8 +44,29 @@ export class CreateSaleComponent implements OnInit {
     this.saleForm = this.formBuilder.group({
       customerId: ['', Validators.required],
       deliveryDate: ['', Validators.required],
-      statusId: [1]
+      saleStatusId: [1]
     })
+  }
+
+  get customerId(){ return this.saleForm.get('customerId')}
+
+
+  showNames(){ this.enableCustomerName = true; }
+  hideNames(){ this.enableCustomerName = false;}
+  showIdentificationNumbers(){ this.enableIdentificationNumber = true; }
+  hideIdentificationNumbers(){ this.enableIdentificationNumber = false;}
+  
+  setUppercase(text : string){
+    if(text)
+      return text.toUpperCase();
+    return '';
+  }
+  setCustomer(customer : Customer){
+    this.customerId?.setValue(customer.id);
+    this.identificationNumber.setValue(customer.identificationNumber);
+    this.customerName.setValue(customer.name);
+    this.hideIdentificationNumbers();
+    this.hideNames();
   }
 
   getProducts(){

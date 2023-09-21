@@ -18,6 +18,7 @@ export class OrderPanelComponent implements OnInit {
   shoppingCart : ShoppingCart[] = [];
   totalSale : number = 0;
   totalQuantity : number = 0;
+  currentDate = new Date();
   constructor(
     private shoppingCartService: ShoppingCartService,
     private saleService: SaleService
@@ -61,15 +62,21 @@ export class OrderPanelComponent implements OnInit {
       delete product.productDescription;
     })
     let sale: Sale = {
+      saleDate: this.currentDate,
       ...this.saleForm.value,
+      totalAmount: this.totalSale,
       saleDetails
     };
-    // this.saleService.saveSale(sale).subscribe({
-    //   next: ()=> {
-
-    //   }
-    // })
+    this.saleService.saveSale(sale).subscribe({
+      next: ()=> {
+        console.log('guarda')
+      }
+    })
     console.log('Objeto', sale)
+  }
+
+  createPayment(){
+
   }
 
 

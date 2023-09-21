@@ -42,7 +42,7 @@
     <p class="result">${{totalSale | number}}</p>
   </div>
   <div class="text-center m-4">
-    <button class="addSale rounded m-2 p-2" type="button" (click)="saveSaleInformation()">Guardar Pedido</button>
-    <button class="addSale rounded m-2 p-2" type="button" routerLink="registrar-pago">Facturar</button>
+    <button class="addSale rounded m-2 p-2" type="button" (click)="saveSaleInformation()" [disabled]="saleForm.invalid">Guardar Pedido</button>
+    <button class="addSale rounded m-2 p-2" type="button" (click)="createPayment()" [disabled]="saleForm.invalid">Facturar</button>
   </div>
 </section>

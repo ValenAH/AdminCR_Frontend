@@ -19,7 +19,7 @@ const routes: Routes = [
     component: SaleDetailsComponent
   },
   {
-    path: 'crear/registrar-pago',
+    path: 'registrar-pago/:id',
     component: PaymentComponent
   }
 ];

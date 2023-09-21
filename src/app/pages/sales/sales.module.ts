@@ -11,6 +11,7 @@ import { CreateCustomerComponent } from './create-sale/create-customer/create-cu
 import { SaleDetailsComponent } from './sale-details/sale-details.component';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderPanelComponent } from './create-sale/order-panel/order-panel.component';
+import { SearchCustomerPipe } from './pipes/search-customer.pipe';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { OrderPanelComponent } from './create-sale/order-panel/order-panel.compo
     CreateCustomerComponent,
     SaleDetailsComponent,
     PaymentComponent,
-    OrderPanelComponent
+    OrderPanelComponent,
+    SearchCustomerPipe
   ],
   imports: [
     CommonModule,

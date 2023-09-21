@@ -2,10 +2,13 @@
 @import '../../../../assets/fonts/font'
 
 input
-  height: 38px
+  min-height: 38px
 
 .date[type="date"]::-webkit-calendar-picker-indicator
   cursor: pointer
+
+.front
+  z-index: 1
 
 .createSale
   width: 100%
@@ -28,6 +31,12 @@ input
 
   &:hover
     background-color: #97d3fb
+
+.list-group-item
+  cursor: pointer
+
+  &:hover
+    background: $hover
 
 thead
   background-color: $black

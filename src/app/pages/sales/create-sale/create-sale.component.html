@@ -10,32 +10,40 @@
             <h2 class="saleForm__title" id="createSaleLabel">CREAR VENTA</h2>
           </div>
           <div class="row mt-2 align-items-end">
-            <div class="col-lg-7 col-md-8">
-              <label for="customerName">Cliente</label>
-              <input class="form-control" formControlName="customerId" list="customers" type="text" id="customerName">
-              <datalist id="customers">
-                <option [value]="customer.name" *ngFor="let customer of customers"></option>
-              </datalist>
+            <div class="col-lg-3 col-md-4">
+              <label for="customerName">Numero de identificación</label>
+              <input class="form-control" type="text" [autocomplete]="false" [formControl]="identificationNumber" (focus)="showIdentificationNumbers()">
+              <ul class="list-group position-absolute front" *ngIf="enableIdentificationNumber">
+                <li class="list-group-item" *ngFor="let customer of customers | searchCustomer : identificationNumber.value : setUppercase(customerName.value)" (click)="setCustomer(customer)">{{customer.identificationNumber}}</li>
+              </ul>
             </div>
-              <div class="col-lg-2 col-md-4">
+            <div class="col-lg-5 col-md-4">
+              <label for="customerName">Nombre del cliente</label>
+              <input class="form-control" type="text" [autocomplete]="false"  [formControl]="customerName" (focus)="showNames()">
+              <ul class="list-group position-absolute front" *ngIf="enableCustomerName">
+                <li class="list-group-item" *ngFor="let customer of customers | searchCustomer : identificationNumber.value : setUppercase(customerName.value)" (click)="setCustomer(customer)">{{customer.name}}</li>
+              </ul>
+            </div>
+              <div class="col-lg-3 col-md-4">
                 <div class="w-100">
                   <button class="createCustomer rounded py-1 px-3 my-1" (click)="createCustomerModal()">
                     <h5>Crear cliente</h5>
                   </button>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-12">
-                <label for="deliveryDate">Fecha de entrega</label>
-                <input class="form-control" formControlName="deliveryDate" type="date" id="deliveryDate" required>
-              </div>
             </div>
             <div *ngIf="createCustomer">
               <app-create-customer (closeCustomerModal)="closeModal($event)"></app-create-customer>
             </div>
-            <div class="row">
-              <div class="col my-4">
+            <div class="row align-items-center">
+              <div class="col-8 my-4">
+                <label for="customerName">Nombre de producto</label>
                 <app-searchbar (searchTextChanged)="searchText($event)"></app-searchbar>
               </div>
+              <div class="col-lg-3 col-md-12">
+                <label for="deliveryDate">Fecha de entrega</label>
+                <input class="form-control" formControlName="deliveryDate" type="date" id="deliveryDate" required>
+              </div> 
             </div>
             <div class="row">
               <div class="col">
