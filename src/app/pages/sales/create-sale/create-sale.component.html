@@ -1,5 +1,4 @@
-<section class="container-fluid">
-  <div class="container d-flex">
+ <section class="container-fluid d-flex">
     <div class="createSale" [ngClass]="{'active': productAdded}">
       <div class="sale p-2">
         <form [formGroup]="saleForm" class="createSaleForm rounded">
@@ -10,7 +9,7 @@
             <h2 class="saleForm__title" id="createSaleLabel">CREAR VENTA</h2>
           </div>
           <div class="row mt-2 align-items-end">
-            <div class="col-lg-3 col-md-4">
+            <div class="col-lg-4 col-md-4">
               <label for="customerName">Numero de identificación</label>
               <input class="form-control" type="text" [autocomplete]="false" [formControl]="identificationNumber" (focus)="showIdentificationNumbers()">
               <ul class="list-group position-absolute front" *ngIf="enableIdentificationNumber">
@@ -26,7 +25,7 @@
             </div>
               <div class="col-lg-3 col-md-4">
                 <div class="w-100">
-                  <button class="createCustomer rounded py-1 px-3 my-1" (click)="createCustomerModal()">
+                  <button class="createCustomer rounded py-1 px-3" (click)="createCustomerModal()">
                     <h5>Crear cliente</h5>
                   </button>
                 </div>
@@ -35,47 +34,72 @@
             <div *ngIf="createCustomer">
               <app-create-customer (closeCustomerModal)="closeModal($event)"></app-create-customer>
             </div>
-            <div class="row align-items-center">
-              <div class="col-8 my-4">
-                <label for="customerName">Nombre de producto</label>
-                <app-searchbar (searchTextChanged)="searchText($event)"></app-searchbar>
-              </div>
-              <div class="col-lg-3 col-md-12">
+            <div class="row align-items-end my-2">
+              <div class="col-lg-4 col-md-12">
                 <label for="deliveryDate">Fecha de entrega</label>
                 <input class="form-control" formControlName="deliveryDate" type="date" id="deliveryDate" required>
               </div> 
-            </div>
-            <div class="row">
-              <div class="col">
-                <table class="table rounded mt-2">
-                  <thead>
-                    <tr>
-                      <th scope="col">PRODUCTO</th>
-                      <th scope="col">DESCRIPCIÓN</th>
-                      <th scope="col">PRECIO</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let product of products | productFilter: textToSearch; index as i" class="product">
-                      <td class="product__productName ms-2">{{product.name}}</td>
-                      <td class="product__productDescription ms-2">{{product.description}}</td>
-                      <td class="product__productPrice ms-2">$ {{product.price}}</td>
-                      <td>
-                        <button class="product__btn-action" (click)="addToCart(product)">
-                          <img src="../../../../assets/general/plus.svg" alt="">
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <div class="col-lg-6 d-flex">
+                <input class="mx-2" formControlName="isCredit" type="checkbox" id="deliveryDate" required>
+                <label for="deliveryDate">Venta a crédito</label>
+              </div> 
             </div>
         </form>
-      </div>
+        <div *ngIf="productAdded">
+          <table class="table rounded mt-4">
+            <thead>
+              <tr>
+                <th>NOMBRE</th>
+                <th></th>
+                <th>CANTIDAD</th>
+                <th>PRECIO</th>
+                <th>DESCUENTO</th>
+                <th>IMPUESTO</th>
+                <th>TOTAL</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="product" *ngFor="let item of shoppingCart">
+                <td class="product__productName text-nowrap">{{item.productName}}</td>
+                <td class="text-nowrap">{{item.productDescription}}</td>
+                <td><input class="input input--short" type="number" min="0" [(ngModel)]="item.quantity" (change)="changes()"></td>
+                <td><input class="input text-right" type="text" [(ngModel)]="item.amount" (change)="changes()"></td>
+                <td><input class="input" type="text" [(ngModel)]="item.discount" (change)="changes()"></td>
+                <td><input class="input" type="text" [(ngModel)]="item.tax" (change)="changes()"></td>
+                <td class="mx-2">{{item.quantity*item.amount | number}}</td>
+                <td>
+                  <button class="product__btn-action" (click)="removeFromCart(item.productId)">
+                    <img src="../../../../assets/general/minus.svg" alt="">
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+            <hr class="text-light">
+            <div class="d-flex justify-content-between">
+              <h4>Cantidad de productos</h4>
+              <p>{{totalQuantity}}</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h4>Total</h4>
+              <p >${{totalSale | number}}</p>
+            </div>
+            <div class="text-center m-4">
+              <button class="addSale rounded m-2 p-2" type="button" (click)="saveSaleInformation()" [disabled]="saleForm.invalid">Guardar Pedido</button>
+              <button class="addSale rounded m-2 p-2" type="button" (click)="createPayment()" [disabled]="saleForm.invalid">Facturar</button>
+            </div>
+          </div>
+        </div>
+        <div class="m-3" *ngIf="!productAdded">
+          <hr>
+          <a class="d-flex align-items-center text-decoration-none text-dark" (click)="productAdded = true">
+            <i class="bi bi-plus-circle-fill icon"></i>
+            <span class="px-2">Agregar productos</span>
+          </a>
+        </div>
     </div>
-    <div *ngIf="productAdded" class="orderPanel bg-dark text-light p-2 rounded-2" [ngClass]="{'active': !productAdded}">
-      <app-order-panel (productAdded)="closePanel($event)" [saleForm]="saleForm"></app-order-panel>
+    <div  class="orderPanel bg-dark text-light p-2 rounded-2" [ngClass]="{'active': !productAdded}">
+      <app-order-panel  [saleForm]="saleForm"></app-order-panel>
     </div>
-  </div>
-</section>
+  </section>

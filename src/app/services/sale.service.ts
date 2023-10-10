@@ -30,4 +30,7 @@ export class SaleService {
    getPaymentMethod(){
     return this.http.get(`${this._urlApi}PaymentMethod/GetPaymentMethods`)
    }
+   deleteSaleDetail(id: number) {
+    return this.http.delete(`${this._urlApi}SaleDetails/${id}`)
+   }
 }

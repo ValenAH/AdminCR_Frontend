@@ -15,6 +15,16 @@ export class CreateProductComponent implements OnInit {
   public productId: number = 0;
   public productCreated : boolean = false;
   public categories: Category[] = []
+  public productTypes: any[] = [
+    {
+      id: 1,
+      name: 'Unidad'
+    },
+    {
+      id: 1,
+      name: 'Combo'
+    }
+  ];
   public message : string = '';
   constructor(
     private formBuilder: FormBuilder,
@@ -40,7 +50,8 @@ export class CreateProductComponent implements OnInit {
       description: [''],
       unitCost: ['', Validators.required],
       price: ['', Validators.required],
-      categoryId: ['',Validators.required]
+      categoryId: ['',Validators.required],
+      productTypeId:[1,Validators.required]
     });
   }
 

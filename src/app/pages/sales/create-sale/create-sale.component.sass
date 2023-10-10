@@ -2,7 +2,7 @@
 @import '../../../../assets/fonts/font'
 
 input
-  min-height: 38px
+  height: 35px
 
 .date[type="date"]::-webkit-calendar-picker-indicator
   cursor: pointer
@@ -23,7 +23,7 @@ input
   transition: 280ms ease-out
 
   &.active
-    width: 0%
+    display: none
 
 .createCustomer
   border: none
@@ -69,10 +69,42 @@ thead
     &:hover
       transform: scale(1.1)
 
-.result
-  color: $white
+.input
+  color: $black
+  padding: 5px
+  margin-y: 10px
+  font-size: 1rem
+  border: none
+  border-bottom: 1px solid $gray-light
+  width: 6rem
+
+  &::placeholder
+    color: $blue
+    font-size: 1rem
+
+  &:focus
+    outline: none
+    border: 1px solid $blue
+    border-radius: 5px
+  
+  &--short
+    width: 3rem
+
+.icon
+  color: $blue
+  cursor:pointer
 
 .close
   background-color: transparent
   position: absolute
   left: 5%
+
+.addSale
+  border: none
+  background-color: $blue
+
+  &:hover
+    background-color: #97d3fb
+
+  &:disabled
+    background-color: $gray-light

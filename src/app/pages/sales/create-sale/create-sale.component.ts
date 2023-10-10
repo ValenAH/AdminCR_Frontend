@@ -7,6 +7,8 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from 'src/app/common/models/customer.model';
 import { SaleDetails } from 'src/app/common/models/saleDetails.models';
 import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
+import { SaleService } from 'src/app/services/sale.service';
+import { Sale } from 'src/app/common/models/sale.model';
 
 @Component({
   selector: 'app-create-sale',
@@ -14,9 +16,9 @@ import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
   styleUrls: ['./create-sale.component.sass']
 })
 export class CreateSaleComponent implements OnInit {
-  @Input() _productsToSearch : string = '';
+  
   createCustomer: boolean = false;
-  productAdded: boolean = false;
+  
   saleForm!: FormGroup;
   products: Product[] = [];
   customers: Customer[] = [];
@@ -26,25 +28,29 @@ export class CreateSaleComponent implements OnInit {
   enableCustomerName: boolean = false;
   shoppingCart: ShoppingCart[] = [];
   totalSale: number= 0;
+  totalQuantity : number = 0;
+  currentDate = new Date();
+  productAdded: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private shoppingCartService: ShoppingCartService,
-    private productService: ProductService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private saleService: SaleService,
     ) {
     this.buildSaleForm();
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
   }
 
   ngOnInit(): void {
-    this.getProducts();
     this.getCustomers();
+    this.getTotal();
   }
   buildSaleForm(){
     this.saleForm = this.formBuilder.group({
       customerId: ['', Validators.required],
       deliveryDate: ['', Validators.required],
-      saleStatusId: [1]
+      saleStatusId: [1],
+      isCredit: [false]
     })
   }
 
@@ -69,13 +75,6 @@ export class CreateSaleComponent implements OnInit {
     this.hideNames();
   }
 
-  getProducts(){
-    this.productService.getProducts().subscribe({
-      next: (response : any) =>{
-        this.products = response.data
-      }
-    })
-  }
   getCustomers(){
     this.customerService.getCustomers().subscribe({
       next: (response : any) =>{
@@ -83,28 +82,8 @@ export class CreateSaleComponent implements OnInit {
       }
     })
   }
-  searchText(text: string){
-    this._productsToSearch = text;
-  }
-  get textToSearch(){ return this._productsToSearch.toUpperCase() }
 
-  addToCart(product: Product){
-    if(!this.productAdded)
-      this.productAdded = true
-
-    let item = {
-      productId: product.id,
-      productName: product.name,
-      productDescription: product.description,
-      amount: product.price,
-      quantity: 1,
-      discount: null,
-      tax: null
-
-    }
-    this.shoppingCart = this.shoppingCartService.addProduct(item);
-    this.shoppingCartService.sendTotal();
-  }
+  
   createCustomerModal(){
     this.createCustomer = true;
   }
@@ -112,7 +91,48 @@ export class CreateSaleComponent implements OnInit {
     this.createCustomer = event;
     this.getCustomers();
   }
-  closePanel(e : boolean){
-    this.productAdded = e;
+  removeFromCart(productId: number){
+    this.shoppingCart = this.shoppingCartService.removeProduct(productId);
+    this.shoppingCart = this.shoppingCartService.getShoppingCart();
+    this.totalSale = this.shoppingCartService.getTotal();
+    this.totalQuantity = this.shoppingCartService.getTotalQuantity();
+  }
+  getTotal(){
+    this.shoppingCartService.total$.subscribe({
+      next: (total : any)=>{
+        this.totalSale = total.totalSale;
+        this.totalQuantity = total.totalQuantity
+      }
+    })
+  }
+  changes(){
+    this.totalSale = this.shoppingCartService.getTotal();
+    this.totalQuantity = this.shoppingCartService.getTotalQuantity();
+  }
+  saveSaleInformation(){
+    //saving sale details
+    this.shoppingCart = this.shoppingCartService.getShoppingCart();
+    let string = JSON.stringify(this.shoppingCart)
+    let saleDetails = JSON.parse(string);
+    saleDetails.map((product : any)=>{
+      delete product.productName;
+      delete product.productDescription;
+    })
+    let sale: Sale = {
+      saleDate: this.currentDate,
+      ...this.saleForm.value,
+      totalAmount: this.totalSale,
+      saleDetails
+    };
+    this.saleService.saveSale(sale).subscribe({
+      next: ()=> {
+        console.log('guarda')
+      }
+    })
+    console.log('Objeto', sale)
+  }
+
+  createPayment(){
+
   }
 }

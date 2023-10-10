@@ -1,48 +1,32 @@
 <section>
-  <h3 class="text-light text-center mt-1">PEDIDO</h3>
+  <h3 class="text-light text-center mt-1">ELIGIR PRODUCTOS</h3>
   <hr class="text-light">
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>Cantidad</th>
-        <th>Precio</th>
-        <th>Descuento</th>
-        <th>Impuesto</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="product" *ngFor="let item of shoppingCart">
-        <td>
-          <button class="product__btn-action" (click)="removeFromCart(item.productId)">
-            <img src="../../../../assets/general/minus.svg" alt="">
-          </button>
-        </td>
-        <td class="product__productName px-4">{{item.productName}}</td>
-        <td>{{item.productDescription}}</td>
-        <td><input class="product__quantity" type="number" min="0" [(ngModel)]="item.quantity" (change)="changes()"></td>
-        <td><input class="product__amount text-right" type="text" [(ngModel)]="item.amount" (change)="changes()"></td>
-        <td><input class="product__discount" type="text" [(ngModel)]="item.discount" (change)="changes()"></td>
-        <td><input class="product__tax" type="text" [(ngModel)]="item.tax" (change)="changes()"></td>
-        <td class="mx-2">{{item.quantity*item.amount | number}}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr class="text-light">
-  <div class="d-flex justify-content-between">
-    <h4>Cantidad de productos</h4>
-    <p class="result">{{totalQuantity}}</p>
+  <div class="row">
+    <div class="col-12 my-2">
+      <label for="customerName">Nombre de producto</label>
+      <app-searchbar (searchTextChanged)="searchText($event)"></app-searchbar>
+    </div>
   </div>
-  <div class="d-flex justify-content-between">
-    <h4>Total</h4>
-    <p class="result">${{totalSale | number}}</p>
-  </div>
-  <div class="text-center m-4">
-    <button class="addSale rounded m-2 p-2" type="button" (click)="saveSaleInformation()" [disabled]="saleForm.invalid">Guardar Pedido</button>
-    <button class="addSale rounded m-2 p-2" type="button" (click)="createPayment()" [disabled]="saleForm.invalid">Facturar</button>
-  </div>
+    <table class="table rounded mt-2">
+      <thead>
+        <tr>
+          <th scope="col">PRODUCTO</th>
+          <th scope="col">DESCRIPCIÓN</th>
+          <th scope="col">PRECIO</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products | productFilter: textToSearch; index as i" class="product">
+          <td class="product__productName ms-2">{{product.name}}</td>
+          <td class="product__productDescription ms-2">{{product.description}}</td>
+          <td class="product__productPrice ms-2 text-nowrap">$ {{product.price}}</td>
+          <td>
+            <button class="product__btn-action" (click)="addToCart(product)">
+              <img src="../../../../assets/general/plus.svg" alt="">
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 </section>

@@ -5,6 +5,8 @@ import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { SaleService } from '../../../../services/sale.service';
 import { Sale } from 'src/app/common/models/sale.model';
+import { Product } from 'src/app/common/models/product.model';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-order-panel',
@@ -12,72 +14,57 @@ import { Sale } from 'src/app/common/models/sale.model';
   styleUrls: ['./order-panel.component.sass']
 })
 export class OrderPanelComponent implements OnInit {
+  @Input() _productsToSearch : string = '';
   @Input() saleForm !: FormGroup;
-  @Output() productAdded : EventEmitter<boolean> = new EventEmitter();
+  products: Product[]= [];
+  
   saleDetails!: FormGroup ;
   shoppingCart : ShoppingCart[] = [];
   totalSale : number = 0;
-  totalQuantity : number = 0;
-  currentDate = new Date();
+  
+  
   constructor(
+    private productService: ProductService,
     private shoppingCartService: ShoppingCartService,
-    private saleService: SaleService
   ) {
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
   }
 
   ngOnInit(): void {
-    this.getTotal();
+    this.getProducts();
   }
-  getTotal(){
-    this.shoppingCartService.total$.subscribe({
-      next: (total : any)=>{
-        this.totalSale = total.totalSale;
-        this.totalQuantity = total.totalQuantity
+  searchText(text: string){
+    this._productsToSearch = text;
+  }
+  get textToSearch(){ return this._productsToSearch.toUpperCase() }
+  getProducts(){
+    this.productService.getProducts().subscribe({
+      next: (response : any) =>{
+        this.products = response.data
       }
     })
   }
+  addToCart(product: Product){
+    let item = {
+      productId: product.id,
+      productName: product.name,
+      productDescription: product.description,
+      amount: product.price,
+      quantity: 1,
+      discount: null,
+      tax: null
 
-  removeFromCart(productId: number){
-    this.shoppingCart = this.shoppingCartService.removeProduct(productId);
-    this.shoppingCart = this.shoppingCartService.getShoppingCart();
-    this.totalSale = this.shoppingCartService.getTotal();
-    this.totalQuantity = this.shoppingCartService.getTotalQuantity();
-    if(this.shoppingCart.length === 0)
-      this.productAdded.emit(false);
+    }
+    this.shoppingCart = this.shoppingCartService.addProduct(item);
+    this.shoppingCartService.sendTotal();
   }
+  
 
-  changes(){
-    this.totalSale = this.shoppingCartService.getTotal();
-    this.totalQuantity = this.shoppingCartService.getTotalQuantity();
-  }
+  
 
-  saveSaleInformation(){
-    //saving sale details
-    this.shoppingCart = this.shoppingCartService.getShoppingCart();
-    let string = JSON.stringify(this.shoppingCart)
-    let saleDetails = JSON.parse(string);
-    saleDetails.map((product : any)=>{
-      delete product.productName;
-      delete product.productDescription;
-    })
-    let sale: Sale = {
-      saleDate: this.currentDate,
-      ...this.saleForm.value,
-      totalAmount: this.totalSale,
-      saleDetails
-    };
-    this.saleService.saveSale(sale).subscribe({
-      next: ()=> {
-        console.log('guarda')
-      }
-    })
-    console.log('Objeto', sale)
-  }
+  
 
-  createPayment(){
-
-  }
+  
 
 
 }

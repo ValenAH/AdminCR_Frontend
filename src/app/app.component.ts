@@ -31,12 +31,12 @@ export class AppComponent {
     if (event instanceof NavigationEnd) {
       setTimeout(() =>{
         this.loader = false;
-      }, 2000)
+      }, 1000)
     }
     if (event instanceof NavigationCancel) {
       setTimeout(() =>{
         this.loader = true;
-      }, 2000)
+      }, 1000)
     }
   }
 }

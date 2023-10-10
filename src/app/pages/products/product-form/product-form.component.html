@@ -27,9 +27,15 @@
               <input class="w-100" formControlName="price" type="number" id="price" min="0">
             </div>
             <div class="mt-2">
-              <label for="price">Categoría</label>
+              <label for="category">Categoría</label>
               <select class="w-100" formControlName="categoryId" id="category">
                 <option [value]="category.id" *ngFor="let category of categories">{{category.name}}</option>
+              </select>
+            </div>
+            <div class="mt-2">
+              <label for="productType">Tipo de Producto</label>
+              <select class="w-100" formControlName="productTypeId" id="category">
+                <option [value]="item.id" *ngFor="let item of productTypes">{{item.name}}</option>
               </select>
             </div>
           </div>

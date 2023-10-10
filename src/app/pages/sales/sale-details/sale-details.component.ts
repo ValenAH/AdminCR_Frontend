@@ -34,4 +34,32 @@ export class SaleDetailsComponent implements OnInit {
     })
   }
 
+  deleteSaleDetail(id:number){
+    this.saleService.deleteSaleDetail(id).subscribe({
+      next:(resp) => {
+        console.log(resp)
+      }
+    })
+  }
+
+  edit(isEdit:boolean){
+    if(isEdit)
+      isEdit = false;
+    else{
+      isEdit = true;
+    }
+    console.log(isEdit);
+  }
+  cancelEdit(isEdit:boolean){
+    if(isEdit)
+      isEdit = false;
+    else{
+      isEdit = true;
+    }
+    console.log(isEdit);
+  }
+  confirmEdit(saleDetailId: number){
+
+  }
+
 }
