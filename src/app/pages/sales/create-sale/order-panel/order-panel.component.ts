@@ -17,6 +17,8 @@ export class OrderPanelComponent implements OnInit {
   @Input() _productsToSearch : string = '';
   @Input() saleForm !: FormGroup;
   products: Product[]= [];
+  page : number = 0;
+  itemsPerPage : number = 10;
   
   saleDetails!: FormGroup ;
   shoppingCart : ShoppingCart[] = [];
@@ -58,7 +60,45 @@ export class OrderPanelComponent implements OnInit {
     this.shoppingCart = this.shoppingCartService.addProduct(item);
     this.shoppingCartService.sendTotal();
   }
-  
+
+  nextPage(){
+    this.page+=this.itemsPerPage;
+   }
+  previousPage(){
+    this.page-=this.itemsPerPage;
+   }
+   initialPage(size: number){
+    if(size)
+      return this.page + 1;
+    return 0
+   }
+   maxValidation(size: number){
+    if((this.page + this.itemsPerPage) > size)
+      return this.page + size
+    return this.page + this.itemsPerPage
+   }
+   sizeArray(){
+    let filteredProducts = this.products
+    if(this.textToSearch){
+      filteredProducts = this.filter(filteredProducts,'name',this.textToSearch);
+    }
+    if(!this.textToSearch)
+      return this.products.length;
+    return filteredProducts.length;
+   }
+
+   filter(products: Product[], atribute: string, value: string){
+    let filter = [];
+    filter = products.filter((request: any)=>request[atribute].toUpperCase().includes(value.toUpperCase()))
+    return filter;
+   }
+
+   disableNextButton(){
+    let size = this.sizeArray();
+    if((this.page + this.itemsPerPage)>= size)
+      return true
+    return false
+   }
 
   
 

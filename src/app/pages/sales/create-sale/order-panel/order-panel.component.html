@@ -1,5 +1,5 @@
 <section>
-  <h3 class="text-light text-center mt-1">ELIGIR PRODUCTOS</h3>
+  <h3 class="text-light text-center mt-1">ELEGIR PRODUCTOS</h3>
   <hr class="text-light">
   <div class="row">
     <div class="col-12 my-2">
@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products | productFilter: textToSearch; index as i" class="product">
+        <tr *ngFor="let product of products | productFilter: textToSearch: page : itemsPerPage; index as i" class="product">
           <td class="product__productName ms-2">{{product.name}}</td>
           <td class="product__productDescription ms-2">{{product.description}}</td>
           <td class="product__productPrice ms-2 text-nowrap">$ {{product.price}}</td>
@@ -29,4 +29,17 @@
         </tr>
       </tbody>
     </table>
+    <div class="row justify-content-end me-1">
+      <div class="col-lg-5 col-md-12 d-flex align-items-center justify-content-end">
+        <button class="paginate" (click)="previousPage()" [disabled]="page == 0">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="paginate" (click)="nextPage()" [disabled]="disableNextButton()">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+        <div>
+          <span>{{initialPage((products | productFilter : textToSearch : page : itemsPerPage).length)}} - {{maxValidation((products | productFilter : textToSearch : page : itemsPerPage).length)}} of {{sizeArray()}}</span>
+        </div>
+      </div>
+    </div>
 </section>

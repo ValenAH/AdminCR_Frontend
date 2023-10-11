@@ -19,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products | productFilter : textToSearch" class="product">
+          <tr *ngFor="let product of products | productFilter : textToSearch : page : itemsPerPage" class="product">
             <td class="product__productName ms-2">{{product.name}}</td>
             <td class="product__productDescription ms-2">{{product.description}}</td>
             <td class="product__productCost ms-2">$ {{product.unitCost | number}}</td>
@@ -36,6 +36,19 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="row justify-content-end me-1">
+    <div class="col-lg-5 col-md-12 d-flex align-items-center justify-content-end">
+      <button class="paginate" (click)="previousPage()" [disabled]="page == 0">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button class="paginate" (click)="nextPage()" [disabled]="disableNextButton()">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+      <div>
+        <span>{{initialPage((products | productFilter : textToSearch : page : itemsPerPage).length)}} - {{maxValidation((products | productFilter : textToSearch : page : itemsPerPage).length)}} of {{sizeArray()}}</span>
+      </div>
     </div>
   </div>
 </section>
