@@ -9,6 +9,7 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProductFilterPipe } from 'src/app/pipes/product-filter.pipe';
 import { OrderPanelComponent } from '../pages/sales/create-sale/order-panel/order-panel.component';
+import { InformationComponent } from './information/information.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { OrderPanelComponent } from '../pages/sales/create-sale/order-panel/orde
     SearchbarComponent,
     PreloaderComponent,
     ErrorMessageComponent,
-    ProductFilterPipe
+    ProductFilterPipe,
+    InformationComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { OrderPanelComponent } from '../pages/sales/create-sale/order-panel/orde
     SearchbarComponent,
     PreloaderComponent,
     ErrorMessageComponent,
-    ProductFilterPipe
+    ProductFilterPipe,
+    InformationComponent
   ]
 })
 export class SharedModule { }

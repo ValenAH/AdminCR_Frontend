@@ -1,0 +1,35 @@
+@import '../../../assets/sass/_variables'
+
+.modal-shadow
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  min-height: 95vh
+  height: 100%
+  background-color: rgba(73, 73, 73, 0.68)
+  backdrop-filter: blur(7px)
+  z-index: 1
+
+  .modal-container
+    width: 60%
+    position: absolute
+    top: 15%
+
+
+    .informationContainer
+      position: relative
+      background-color: black
+      box-shadow: 0 0 30px 5px $black
+      opacity: 0.95
+      color: $blue
+      min-height: 10rem
+
+    .icon:before
+        font-size: 5rem
+        color: $success
+        padding: 15px
+
+    .text
+        color: $white
+    

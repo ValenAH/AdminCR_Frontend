@@ -1,10 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, SimpleChanges, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { SaleDetails } from 'src/app/common/models/saleDetails.models';
+import { FormGroup } from '@angular/forms';
 import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { SaleService } from '../../../../services/sale.service';
-import { Sale } from 'src/app/common/models/sale.model';
 import { Product } from 'src/app/common/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -15,7 +12,6 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class OrderPanelComponent implements OnInit {
   @Input() _productsToSearch : string = '';
-  @Input() saleForm !: FormGroup;
   products: Product[]= [];
   page : number = 0;
   itemsPerPage : number = 10;

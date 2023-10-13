@@ -21,6 +21,7 @@ export class SalesListComponent implements OnInit {
     this.saleService.getSales().subscribe({
       next: (response : any) => {
         this.sales = response.data
+        this.sales.reverse();
       }
     })
   }

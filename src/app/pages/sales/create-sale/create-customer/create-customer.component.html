@@ -11,34 +11,29 @@
           </div>
           <div class="container p-2">
             <div class="mt-2">
-              <label for="identificationTypeId">Tipo de identificacion</label>
               <select class="w-100" formControlName="identificationTypeId" type="text" id="identificationTypeId">
+                <option [value]="''" hidden>Selecciona un tipo de documento</option>
                 <option [value]="item.id" *ngFor="let item of identificationTypes">{{item.name}}</option>
               </select>
             </div>
             <div class="mt-2">
-              <label for="identificationNumber">Numero de identificacion</label>
-              <input class="w-100" formControlName="identificationNumber" type="text" id="identificationNumber">
+              <input class="w-100" formControlName="identificationNumber" placeholder="Número de documento" type="text" id="identificationNumber">
             </div>
             <div class="mt-2">
-              <label for="name">Nombre</label>
-              <input class="w-100" formControlName="name" type="text" id="name">
+              <input class="w-100" formControlName="name" type="text" id="name" placeholder="Nombre del cliente">
             </div>
             <div class="mt-2">
-              <label for="contactNumber">Número de contacto</label>
-              <input class="w-100" formControlName="telephone" type="tel" id="contactNumber">
+              <input class="w-100" formControlName="telephone" type="tel" id="contactNumber" placeholder="Número de teléfono">
             </div>
             <div class="mt-2">
-              <label for="address">Dirección</label>
-              <input class="w-100" formControlName="address" type="text" id="address">
+              <input class="w-100" formControlName="address" type="text" id="address" placeholder="Dirección">
             </div>
             <div class="mt-2">
-              <label for="email">Correo electrónico</label>
-              <input class="w-100" formControlName="email" type="text" id="address">
+              <input class="w-100" formControlName="email" type="text" id="email" placeholder="Correo electrónico">
             </div>
           </div>
-          <div class="text-center my-2">
-            <button class="addCustomer rounded m-4 p-2" type="submit" [disabled]="customerForm.invalid">Agregar Cliente</button>
+          <div class="text-center">
+            <button class="addCustomer rounded m-2 p-2" type="submit" [disabled]="customerForm.invalid">Agregar Cliente</button>
           </div>
         </form>
         <div *ngIf="customerCreated">

@@ -40,7 +40,7 @@
                 <input class="form-control" formControlName="deliveryDate" type="date" id="deliveryDate" required>
               </div> 
               <div class="col-lg-6 d-flex">
-                <input class="mx-2" formControlName="isCredit" type="checkbox" id="deliveryDate" required>
+                <input class="mx-2" formControlName="isCredit" type="checkbox" id="isCredit">
                 <label for="deliveryDate">Venta a crédito</label>
               </div> 
             </div>
@@ -89,8 +89,7 @@
               <p >${{totalSale | number}}</p>
             </div>
             <div class="text-center m-4">
-              <button class="addSale rounded m-2 p-2" type="button" (click)="saveSaleInformation()" [disabled]="saleForm.invalid">Guardar Pedido</button>
-              <button class="addSale rounded m-2 p-2" type="button" (click)="createPayment()" [disabled]="saleForm.invalid">Facturar</button>
+              <button class="addSale rounded m-2 p-2" type="button" (click)="saveSaleInformation()" [disabled]="saleForm.invalid || shoppingCart.length == 0">Guardar Pedido</button>
             </div>
           </div>
         </div>
@@ -103,6 +102,7 @@
         </div>
     </div>
     <div  class="orderPanel bg-dark text-light p-3 rounded-2" [ngClass]="{'active': !productAdded}">
-      <app-order-panel  [saleForm]="saleForm"></app-order-panel>
+      <app-order-panel></app-order-panel>
     </div>
   </section>
+  <app-information *ngIf="showInformation" (closeInformation)="closeInformation($event)"></app-information>

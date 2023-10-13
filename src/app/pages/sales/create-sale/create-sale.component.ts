@@ -9,6 +9,7 @@ import { SaleDetails } from 'src/app/common/models/saleDetails.models';
 import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
 import { SaleService } from 'src/app/services/sale.service';
 import { Sale } from 'src/app/common/models/sale.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-sale',
@@ -31,11 +32,13 @@ export class CreateSaleComponent implements OnInit {
   totalQuantity : number = 0;
   currentDate = new Date();
   productAdded: boolean = false;
+  showInformation: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private shoppingCartService: ShoppingCartService,
     private customerService: CustomerService,
     private saleService: SaleService,
+    private router: Router
     ) {
     this.buildSaleForm();
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
@@ -49,8 +52,8 @@ export class CreateSaleComponent implements OnInit {
     this.saleForm = this.formBuilder.group({
       customerId: ['', Validators.required],
       deliveryDate: ['', Validators.required],
-      saleStatusId: [1],
-      isCredit: [false]
+      saleStatusId: 1,
+      isCredit: false
     })
   }
 
@@ -113,7 +116,6 @@ export class CreateSaleComponent implements OnInit {
     this.totalQuantity = this.shoppingCartService.getTotalQuantity();
   }
   saveSaleInformation(){
-    //saving sale details
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
     let string = JSON.stringify(this.shoppingCart)
     let saleDetails = JSON.parse(string);
@@ -129,13 +131,13 @@ export class CreateSaleComponent implements OnInit {
     };
     this.saleService.saveSale(sale).subscribe({
       next: ()=> {
-        console.log('guarda')
+        console.log('venta',sale)
+        // this.showInformation = true;
       }
     })
-    console.log('Objeto', sale)
   }
-
-  createPayment(){
-
+  closeInformation(e: boolean){
+    this.showInformation = e;
+    this.router.navigateByUrl("/ventas")
   }
 }

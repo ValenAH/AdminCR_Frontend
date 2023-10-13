@@ -62,4 +62,8 @@ export class SaleDetailsComponent implements OnInit {
 
   }
 
+  openInvoice(){
+    window.open(`https://localhost:7291/api/Sale/${this.sale.id}`);
+  }
+
 }

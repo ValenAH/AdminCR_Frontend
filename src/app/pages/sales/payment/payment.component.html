@@ -1,6 +1,6 @@
 <section class="container-fluid">
   <div class="container">
-    <h2 class="text-center">REGISTRAR PAGO</h2>
+    <h2 class="text-center mt-2">REGISTRAR PAGO</h2>
     <hr>
     <form [formGroup]="payments" (ngSubmit)="savePayment()">
         <div formArrayName="payment" *ngFor="let payment of paymentField.controls; let i = index">
