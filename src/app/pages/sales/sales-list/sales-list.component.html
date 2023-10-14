@@ -24,13 +24,15 @@
           </thead>
           <tbody>
             <tr *ngFor="let sale of sales">
-              <td class="sale__saleDate ms-2">{{sale.saleDate | date: 'dd.MM.yyyy'}}</td>
-              <td class="sale__consecutive ms-2">{{sale.consecutive}}</td>
+              <td class="ms-2">{{sale.saleDate | date: 'dd.MM.yyyy'}}</td>
+              <td class="ms-2">{{sale.consecutive}}</td>
               <td>{{sale.customer.identificationNumber}}</td>
               <td class="ps-2">{{sale.customer.name}}</td>
-              <td class="sale__deliveryDate ms-2">{{sale.deliveryDate | date: 'dd.MM.yyyy'}}</td>
-              <td class="sale__totalAmount ms-2">$ {{sale.totalAmount | number}}</td>
-              <td class="sale__orderStatus ms-2">{{sale.saleStatus.status}}</td>
+              <td class="ms-2">{{sale.deliveryDate | date: 'dd.MM.yyyy'}}</td>
+              <td class="ms-2">$ {{sale.totalAmount | number}}</td>
+              <td class="ms-2">
+                <span class="orderStatus--{{sale.saleStatus.status}} px-2 py-1 rounded">{{sale.saleStatus.status}}</span>             
+              </td>
               <td class="text-center">
                 <button class="btn-actions ps-0" routerLink="detalle/{{sale.id}}">
                   <i class="bi bi-eye"></i>

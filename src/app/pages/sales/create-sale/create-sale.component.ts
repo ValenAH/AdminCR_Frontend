@@ -131,8 +131,7 @@ export class CreateSaleComponent implements OnInit {
     };
     this.saleService.saveSale(sale).subscribe({
       next: ()=> {
-        console.log('venta',sale)
-        // this.showInformation = true;
+        this.showInformation = true;
       }
     })
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Payment } from 'src/app/common/models/payment.model';
 import { Sale } from 'src/app/common/models/sale.model';
 import { SaleService } from 'src/app/services/sale.service';
 
@@ -11,6 +12,7 @@ import { SaleService } from 'src/app/services/sale.service';
 export class SaleDetailsComponent implements OnInit {
   private saleId : number;
   public sale !: Sale;
+  public payments: Payment[] = [];
 
   constructor(
     private route : ActivatedRoute,
@@ -21,6 +23,7 @@ export class SaleDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSaleById();
+    this.getPaymentById();
   }
 
   getSaleById(){
@@ -30,6 +33,13 @@ export class SaleDetailsComponent implements OnInit {
     this.saleService.getSaleById(data).subscribe({
       next: (response : any) => {
         this.sale = response.data;
+      }
+    })
+  }
+  getPaymentById(){
+    this.saleService.getPayments(this.saleId).subscribe({
+      next: (response: any)=> {
+        this.payments = response.data;
       }
     })
   }

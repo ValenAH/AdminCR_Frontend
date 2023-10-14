@@ -20,6 +20,25 @@ thead
 .btn
   border: none
   background-color: $blue
+  box-shadow: 0 0 5px 1px $gray-light
 
   &:hover
     background-color: #97d3fb
+
+.orderStatus
+
+  &--Pendiente
+    background-color: $gray-light
+
+  &--Parcial
+    background-color: $gold
+
+  &--Finalizada
+    background-color: $success
+
+.paymentDetails
+  border: 1px solid $gray-light
+
+  &__title
+    top: -15px
+    background-color: white
