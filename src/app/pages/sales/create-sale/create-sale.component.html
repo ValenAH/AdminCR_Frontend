@@ -53,7 +53,6 @@
                 <th></th>
                 <th>CANTIDAD</th>
                 <th>PRECIO</th>
-                <th>DESCUENTO</th>
                 <th>IMPUESTO</th>
                 <th>TOTAL</th>
                 <th></th>
@@ -65,7 +64,6 @@
                 <td class="text-nowrap">{{item.productDescription}}</td>
                 <td><input class="input input--short" type="number" min="0" [(ngModel)]="item.quantity" (change)="changes()"></td>
                 <td><input class="input text-right" type="text" [(ngModel)]="item.amount" (change)="changes()"></td>
-                <td><input class="input" type="text" [(ngModel)]="item.discount" (change)="changes()"></td>
                 <td><input class="input" type="text" [(ngModel)]="item.tax" (change)="changes()"></td>
                 <td class="mx-2">{{item.quantity*item.amount | number}}</td>
                 <td>

@@ -1,7 +1,12 @@
 <section class="container-fluid">
   <div class="container">
-    <h2 class="text-center mt-2">REGISTRAR PAGO</h2>
-    <hr>
+    <div class="position-relative">
+      <button type="button" class="close border-0 m-0 p-0" [routerLink]="['/ventas']">
+        <i class="close__back bi bi-arrow-left"></i>
+      </button>
+      <h2 class="text-center mt-2">REGISTRAR PAGO</h2>
+      <hr>
+    </div>
     <form [formGroup]="payments" (ngSubmit)="savePayment()">
         <div formArrayName="payment" *ngFor="let payment of paymentField.controls; let i = index">
           <div class="row align-items-end m-3" [formGroupName]="i">

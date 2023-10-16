@@ -77,7 +77,6 @@
               <th class="p-2">Producto</th>
               <th>Cantidad</th>
               <th>Precio</th>
-              <th>Descuento</th>
               <th>Impuesto</th>
               <th>Total</th>
               <th></th>
@@ -88,7 +87,6 @@
               <td>{{saleDetail.product.name}} {{saleDetail.product.description}}</td>
               <td>{{saleDetail.quantity}}</td>
               <td class="text-nowrap">$ {{saleDetail.amount | number}}</td>
-              <td>{{saleDetail.discount ? saleDetail.discount : 0}}</td>
               <td>{{saleDetail.tax ? saleDetail.tax : 0}}</td>
               <td class="text-nowrap">$ {{saleDetail.quantity * saleDetail.amount | number}}</td>
               <td>

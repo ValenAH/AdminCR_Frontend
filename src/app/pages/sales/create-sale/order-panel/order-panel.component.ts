@@ -15,7 +15,6 @@ export class OrderPanelComponent implements OnInit {
   products: Product[]= [];
   page : number = 0;
   itemsPerPage : number = 10;
-  
   saleDetails!: FormGroup ;
   shoppingCart : ShoppingCart[] = [];
   totalSale : number = 0;
@@ -49,7 +48,6 @@ export class OrderPanelComponent implements OnInit {
       productDescription: product.description,
       amount: product.price,
       quantity: 1,
-      discount: null,
       tax: null
 
     }

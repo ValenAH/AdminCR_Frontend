@@ -15,4 +15,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  createSale(){
+    this.router.navigate(['/ventas/crear']);
+  }
+
+  createCustomer(){
+    this.router.navigate(['/clientes/crear']);
+  }
+
 }

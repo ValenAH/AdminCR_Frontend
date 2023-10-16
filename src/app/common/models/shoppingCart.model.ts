@@ -4,6 +4,5 @@ export interface ShoppingCart {
   productDescription?: string,
   amount: number,
   quantity: number,
-  discount: number | null,
   tax: number | null
 }
