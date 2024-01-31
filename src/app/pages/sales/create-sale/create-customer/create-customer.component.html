@@ -2,7 +2,7 @@
   <div class="modal-container ">
     <div class="container-fluid">
       <div class="customerForm m-4 rounded-1">
-        <form [formGroup]="customerForm" (ngSubmit)="saveForm()">
+        <form *ngIf="!customerCreated" [formGroup]="customerForm" (ngSubmit)="saveForm()">
           <div class="modal-header justify-content-center">
             <h5 class="customerForm__title text-center" id="createCustomerLabel">CREAR CLIENTE</h5>
             <button type="button" class="close m-0 p-0 border-0" (click)="closeModal()">

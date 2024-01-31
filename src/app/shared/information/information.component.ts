@@ -6,7 +6,7 @@ import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
   styleUrls: ['./information.component.sass']
 })
 export class InformationComponent implements OnInit {
-  @Input() message: string = 'La venta se ha guardado con éxito';
+  @Input() message: string = '';
   @Output() closeInformation = new EventEmitter<boolean>(); 
 
   constructor() { }

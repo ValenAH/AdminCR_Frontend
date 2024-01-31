@@ -103,4 +103,4 @@
       <app-order-panel></app-order-panel>
     </div>
   </section>
-  <app-information *ngIf="showInformation" (closeInformation)="closeInformation($event)"></app-information>
+  <app-information *ngIf="showInformation" [message]="'La venta se ha creado con éxito'" (closeInformation)="closeInformation($event)"></app-information>

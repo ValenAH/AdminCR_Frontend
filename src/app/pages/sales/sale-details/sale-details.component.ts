@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '@env/environment';
 import { Payment } from 'src/app/common/models/payment.model';
 import { Sale } from 'src/app/common/models/sale.model';
 import { SaleService } from 'src/app/services/sale.service';
@@ -73,7 +74,7 @@ export class SaleDetailsComponent implements OnInit {
   }
 
   openInvoice(){
-    window.open(`https://localhost:7291/api/Sale/${this.sale.id}`);
+    window.open(`${environment.backend_url}Sale/${this.sale.id}`);
   }
 
 }

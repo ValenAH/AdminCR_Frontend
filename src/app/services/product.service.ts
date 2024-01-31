@@ -12,7 +12,7 @@ export class ProductService {
   constructor(
     private http: HttpClient
   ) {
-    this._urlApi = environment.dev.url;
+    this._urlApi = environment.backend_url;
    }
 
    getProducts(){

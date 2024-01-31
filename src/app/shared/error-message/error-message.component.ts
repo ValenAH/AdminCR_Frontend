@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-error-message',
@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./error-message.component.sass']
 })
 export class ErrorMessageComponent implements OnInit {
-  message: string = 'Ha ocurrido un error';
+  @Input() message: string = '';
+  @Output() closeInformation = new EventEmitter<boolean>(); 
   constructor() { }
 
   ngOnInit(): void {
+    this.closeModal();
   }
 
+  closeModal(){
+    setInterval(()=>{
+      this.closeInformation.emit(false);
+    }, 2000)
+  }
 }

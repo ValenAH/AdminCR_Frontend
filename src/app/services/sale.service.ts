@@ -12,7 +12,7 @@ export class SaleService {
   constructor(
     private http: HttpClient
   ) {
-    this._urlApi = environment.dev.url;
+    this._urlApi = environment.backend_url;
    }
 
    getSales(){
@@ -20,6 +20,9 @@ export class SaleService {
    }
    saveSale(sale : Sale){
     return this.http.post(`${this._urlApi}Sale/SaveSale`, sale)
+   }
+   updateSale(sale : {id: string, saleStatusId: number}){
+    return this.http.post(`${this._urlApi}Sale/UpdateSale`, sale)
    }
    getSaleDetails(saleId : number){
     return this.http.post(`${this._urlApi}SaleDetails/getSaleDetails`,saleId)

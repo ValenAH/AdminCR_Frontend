@@ -40,7 +40,7 @@
         </div>
 
         <div class="text-center">
-          <button class="savePayment rounded-1" type="submit">Guardar pago</button>
+          <button class="savePayment rounded-1" type="submit" [disabled]="payments.invalid">Guardar pago</button>
         </div>
     </form>
   </div>
