@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PaymentMethod } from 'src/app/common/models/paymentMethod.model';
 import { SaleService } from 'src/app/services/sale.service';
 
@@ -9,8 +9,17 @@ import { SaleService } from 'src/app/services/sale.service';
   styleUrls: ['./payment.component.sass']
 })
 export class PaymentComponent implements OnInit {
-  payments !: FormGroup;
+  payments : FormGroup = this.formBuilder.group({
+    payment: this.formBuilder.array([
+      this.formBuilder.group({
+        date: ['', Validators.required],
+        paymentMethodId: ['', Validators.required],
+        amount: ['', Validators.required]
+      })
+    ])
+  });
   paymentMethods : PaymentMethod[] = [];
+  
   constructor(
     private saleService : SaleService,
     private formBuilder : FormBuilder
@@ -18,7 +27,6 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPaymentMethods();
-    this.buildForm();
   }
 
   getPaymentMethods(){
@@ -28,18 +36,8 @@ export class PaymentComponent implements OnInit {
       }
     })
   }
-  buildForm(){
-    this.payments = this.formBuilder.group({
-      payment: this.formBuilder.array([
-        this.formBuilder.group({
-          date: ['', Validators.required],
-          paymentMethodId: ['', Validators.required],
-          amount: ['', Validators.required]
-        })
-      ])
-    });
-  }
-  get paymentField(){ return this.payments.get('payment') as FormArray; }
+
+  get paymentField(){ return this.payments.get('payment') as UntypedFormArray; }
 
   private createPaymentField(){
     return this.formBuilder.group({

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-searchbar',
@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 })
 export class SearchbarComponent implements OnInit {
   @Output() searchTextChanged = new EventEmitter<string>();
-  wordToSearch!: FormControl;
+  wordToSearch!: UntypedFormControl;
 
   constructor( ) { }
 
@@ -17,7 +17,7 @@ export class SearchbarComponent implements OnInit {
   }
 
   buildForm(){
-    this.wordToSearch = new FormControl('');
+    this.wordToSearch = new UntypedFormControl('');
   }
 
   searchText(){

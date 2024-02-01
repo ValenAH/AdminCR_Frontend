@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, SimpleChanges, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
 import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { Product } from 'src/app/common/models/product.model';
@@ -15,7 +14,6 @@ export class OrderPanelComponent implements OnInit {
   products: Product[]= [];
   page : number = 0;
   itemsPerPage : number = 10;
-  saleDetails!: FormGroup ;
   shoppingCart : ShoppingCart[] = [];
   totalSale : number = 0;
   
@@ -34,6 +32,7 @@ export class OrderPanelComponent implements OnInit {
     this._productsToSearch = text;
   }
   get textToSearch(){ return this._productsToSearch.toUpperCase() }
+
   getProducts(){
     this.productService.getProducts().subscribe({
       next: (response : any) =>{
@@ -93,13 +92,5 @@ export class OrderPanelComponent implements OnInit {
       return true
     return false
    }
-
-  
-
-  
-
-  
-
-
 }
 

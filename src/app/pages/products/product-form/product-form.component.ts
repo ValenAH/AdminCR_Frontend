@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Product } from '../../../common/models/product.model';
+import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -11,7 +10,14 @@ import { Category } from 'src/app/common/models/category.model';
   styleUrls: ['./product-form.component.sass']
 })
 export class CreateProductComponent implements OnInit {
-  public productForm!: FormGroup ;
+  public productForm : FormGroup =this.formBuilder.group({
+    name: ['', Validators.required],
+    description: [''],
+    unitCost: ['', Validators.required],
+    price: ['', Validators.required],
+    categoryId: ['',Validators.required],
+    productTypeId:[1,Validators.required]
+  });;
   public productId: number = 0;
   public productCreated : boolean = false;
   public categories: Category[] = []
@@ -26,6 +32,7 @@ export class CreateProductComponent implements OnInit {
     }
   ];
   public message : string = '';
+  
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
@@ -34,7 +41,6 @@ export class CreateProductComponent implements OnInit {
     ) {  }
 
   ngOnInit(): void {
-    this.buildForm();
     this.getCategories();
     this.route.params.subscribe((params: Params)=>{
       this.productId = Number(params['id']);
@@ -42,17 +48,6 @@ export class CreateProductComponent implements OnInit {
         this.getProductById();
       }
     })
-  }
-
-  buildForm(){
-    this.productForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: [''],
-      unitCost: ['', Validators.required],
-      price: ['', Validators.required],
-      categoryId: ['',Validators.required],
-      productTypeId:[1,Validators.required]
-    });
   }
 
   get name(){ return this.productForm.get('name')};

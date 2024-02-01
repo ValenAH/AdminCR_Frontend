@@ -1,11 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormGroup, FormBuilder, FormArray, UntypedFormControl } from '@angular/forms';
 import { Product } from '../../../common/models/product.model';
 import { ShoppingCartService } from '../../../services/shopping-cart.service';
-import { ProductService } from 'src/app/services/product.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from 'src/app/common/models/customer.model';
-import { SaleDetails } from 'src/app/common/models/saleDetails.models';
 import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
 import { SaleService } from 'src/app/services/sale.service';
 import { Sale } from 'src/app/common/models/sale.model';
@@ -20,11 +18,16 @@ export class CreateSaleComponent implements OnInit {
   
   createCustomer: boolean = false;
   
-  saleForm!: FormGroup;
+  saleForm : FormGroup = this.formBuilder.group({
+    customerId: ['', Validators.required],
+    deliveryDate: ['', Validators.required],
+    saleStatusId: 1,
+    isCredit: false
+  });
   products: Product[] = [];
   customers: Customer[] = [];
-  identificationNumber = new FormControl();
-  customerName = new FormControl();
+  identificationNumber = new UntypedFormControl('');
+  customerName = new UntypedFormControl('');
   enableIdentificationNumber : boolean = false;
   enableCustomerName: boolean = false;
   shoppingCart: ShoppingCart[] = [];
@@ -40,7 +43,6 @@ export class CreateSaleComponent implements OnInit {
     private saleService: SaleService,
     private router: Router
     ) {
-    this.buildSaleForm();
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
   }
 
@@ -48,15 +50,6 @@ export class CreateSaleComponent implements OnInit {
     this.getCustomers();
     this.getTotal();
   }
-  buildSaleForm(){
-    this.saleForm = this.formBuilder.group({
-      customerId: ['', Validators.required],
-      deliveryDate: ['', Validators.required],
-      saleStatusId: 1,
-      isCredit: false
-    })
-  }
-
   get customerId(){ return this.saleForm.get('customerId')}
 
 

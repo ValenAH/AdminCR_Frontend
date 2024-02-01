@@ -11,7 +11,14 @@ import { CustomerService } from 'src/app/services/customer.service';
 export class CreateCustomerComponent implements OnInit {
   @Output() closeCustomerModal : EventEmitter<boolean> = new EventEmitter();
   identificationTypes : IdentificationType[] = [];
-  customerForm !: FormGroup;
+  customerForm : FormGroup = this.formBuilder.group({
+    identificationTypeId: ['', Validators.required],
+    identificationNumber: ['', Validators.required],
+    name: ['', Validators.required],
+    telephone: ['', Validators.required],
+    address: ['', Validators.required],
+    email: ['', Validators.required]
+  });
   customerCreated : boolean = false;
   message : string = '';
   constructor(
@@ -20,18 +27,7 @@ export class CreateCustomerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.buildForm();
     this.getIdentificationTypes();
-  }
-  buildForm(){
-    this.customerForm = this.formBuilder.group({
-      identificationTypeId: ['', Validators.required],
-      identificationNumber: ['', Validators.required],
-      name: ['', Validators.required],
-      telephone: ['', Validators.required],
-      address: ['', Validators.required],
-      email: ['', Validators.required]
-    });
   }
   getIdentificationTypes(){
     this.customerService.getIdentificationType().subscribe({

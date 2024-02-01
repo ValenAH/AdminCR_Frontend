@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,7 +10,10 @@ import { RequestStatus } from 'src/app/common/models/request-status.model';
   styleUrls: ['./sign-up.component.sass']
 })
 export class SignUpComponent{
-  authForm !: FormGroup;
+  authForm : FormGroup = this.fb.group({
+    userName: ['', Validators.required],
+    password: ['', Validators.required]
+  })
   status: RequestStatus = 'init';
   error: boolean = false;
 
@@ -20,18 +23,6 @@ export class SignUpComponent{
     private readonly fb: FormBuilder,
     private router: Router
   ){ }
-
-  ngOnInit(): void {
-    this.initForm();
-
-  }
-
-  private initForm():void {
-    this.authForm = this.fb.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
-    })
-  }
 
   get userName(){ return this.authForm.get('userName');}
   get password() { return this.authForm.get('password');}

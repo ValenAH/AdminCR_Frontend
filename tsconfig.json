@@ -6,7 +6,7 @@
       "@home/*":["src/app/pages/home/*"],
       "@auth/*":["src/app/pages/auth/*"],
       "@shared/*":["src/app/shared/*"],
-      "@env/*": ["src/environments/*"],
+      "@env/*": ["src/environments/*"]
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -22,7 +22,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "es2020",
     "module": "es2020",
     "lib": [
       "es2020",

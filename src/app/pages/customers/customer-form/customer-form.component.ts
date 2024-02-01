@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IdentificationType } from 'src/app/common/models/identificationType.model';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -10,20 +10,26 @@ import { CustomerService } from 'src/app/services/customer.service';
   styleUrls: ['./customer-form.component.sass']
 })
 export class CreateCustomerComponent implements OnInit {
-  public customerForm!: FormGroup ;
+  public customerForm: FormGroup = this.formBuilder.group({
+    identificationTypeId: ['', Validators.required],
+    identificationNumber: ['', Validators.required],
+    name: ['', Validators.required],
+    telephone: ['', Validators.required],
+    address: ['', Validators.required],
+    email: ['', Validators.required]
+  });
   public customerId : number = 0;
   public identificationTypes : IdentificationType[] = [];
   public customerCreated : boolean = false;
   public message :string ='';
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router : Router,
     private route : ActivatedRoute,
     private customerService: CustomerService
     ) { }
 
   ngOnInit(): void {
-    this.buildForm();
     this.getIdentificationTypes();
     this.route.params.subscribe((params: Params)=>{
       this.customerId = Number(params['id']);
@@ -31,17 +37,6 @@ export class CreateCustomerComponent implements OnInit {
         this.getCustomerById();
       }
     })
-  }
-
-  buildForm(){
-    this.customerForm = this.formBuilder.group({
-      identificationTypeId: ['', Validators.required],
-      identificationNumber: ['', Validators.required],
-      name: ['', Validators.required],
-      telephone: ['', Validators.required],
-      address: ['', Validators.required],
-      email: ['', Validators.required]
-    });
   }
 
   getCustomerById(){
