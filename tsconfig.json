@@ -3,10 +3,18 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@home/*":["src/app/pages/home/*"],
-      "@auth/*":["src/app/pages/auth/*"],
-      "@shared/*":["src/app/shared/*"],
-      "@env/*": ["src/environments/*"]
+      "@home/*": [
+        "src/app/pages/home/*"
+      ],
+      "@auth/*": [
+        "src/app/pages/auth/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ]
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -22,12 +30,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
