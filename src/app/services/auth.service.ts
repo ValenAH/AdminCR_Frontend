@@ -42,4 +42,9 @@ export class AuthService {
   public sendUser(user: string){
     this.user.next(user);
   }
+
+  logout(): void {
+    this.tokenService.removeToken();
+    this.sendUser('');
+  }
 }
