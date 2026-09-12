@@ -11,15 +11,19 @@ input
   z-index: 1
 
 .createSale
-  width: 100%
+  flex: 1 1 100%
+  min-width: 0
   transition: 280ms ease-out
 
   &.active
-    width: 60%
+    flex-basis: 60%
 
 .orderPanel
-  width: 80%
+  flex: 0 1 40%
+  max-width: 40rem
+  width: 40%
   height: 90vh
+  overflow: hidden
   transition: 280ms ease-out
 
   &.active

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '@env/environment';
 import { Payment } from 'src/app/common/models/payment.model';
 import { Sale } from 'src/app/common/models/sale.model';
+import { PaymentService } from 'src/app/services/payment.service';
 import { SaleService } from 'src/app/services/sale.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class SaleDetailsComponent implements OnInit {
 
   constructor(
     private route : ActivatedRoute,
-    private saleService : SaleService
+    private saleService : SaleService,
+    private paymentService: PaymentService
   ) {
     this.saleId = Number(this.route.snapshot.paramMap.get('id'));
    }
@@ -38,7 +40,7 @@ export class SaleDetailsComponent implements OnInit {
     })
   }
   getPaymentById(){
-    this.saleService.getPayments(this.saleId).subscribe({
+    this.paymentService.getPayments(this.saleId).subscribe({
       next: (response: any)=> {
         this.payments = response.data;
       }

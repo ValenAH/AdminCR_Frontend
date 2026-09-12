@@ -45,3 +45,4 @@
     </form>
   </div>
 </section>
+<app-information *ngIf="showInformation" [message]="'El pago se registró con éxito'" (closeInformation)="closeInformation($event)"></app-information>

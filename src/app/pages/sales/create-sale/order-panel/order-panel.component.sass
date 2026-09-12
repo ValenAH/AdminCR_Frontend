@@ -8,6 +8,8 @@ thead
 .table
   overflow: hidden
   margin-right: 10px
+  width: 100%
+  table-layout: fixed
 
 .product
   background-color: $white
@@ -18,6 +20,7 @@ thead
 
   &__productName
     text-transform: uppercase
+    word-break: break-word
 
   &__btn-action
     background-color: transparent
@@ -32,20 +35,26 @@ thead
     &:hover
       transform: scale(1.1)
 
+.pagination-controls
+  gap: 0.25rem
+
+.pagination-label
+  white-space: nowrap
+  font-size: 0.8rem
+
 .paginate
-    cursor: pointer
-    margin: 5px
-    border: none
-    background-color: transparent
-  
+  cursor: pointer
+  margin: 5px
+  border: none
+  background-color: transparent
+  display: inline-flex
+  align-items: center
+  justify-content: center
+
+  i
+    font-size: 1rem
+    color: $gray-light
+
+  &:disabled
     i
-      font-size: 1rem
-      color: $gray-light
-  
-    &:disabled
-  
-      i
-        color: black
-      
-    
-  
+      color: black

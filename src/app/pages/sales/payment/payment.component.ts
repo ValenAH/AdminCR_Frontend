@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentMethod } from 'src/app/common/models/paymentMethod.model';
-import { SaleService } from 'src/app/services/sale.service';
+import { normalizeToUtcIsoDate } from 'src/app/common/utils/date.util';
+import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
   selector: 'app-payment',
@@ -9,6 +11,9 @@ import { SaleService } from 'src/app/services/sale.service';
   styleUrls: ['./payment.component.sass']
 })
 export class PaymentComponent implements OnInit {
+  private saleId: number;
+  showInformation: boolean = false;
+
   payments : FormGroup = this.formBuilder.group({
     payment: this.formBuilder.array([
       this.formBuilder.group({
@@ -21,16 +26,20 @@ export class PaymentComponent implements OnInit {
   paymentMethods : PaymentMethod[] = [];
   
   constructor(
-    private saleService : SaleService,
-    private formBuilder : FormBuilder
-  ) { }
+    private paymentService : PaymentService,
+    private formBuilder : FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.saleId = Number(this.route.snapshot.paramMap.get('id'));
+  }
 
   ngOnInit(): void {
     this.getPaymentMethods();
   }
 
   getPaymentMethods(){
-    this.saleService.getPaymentMethod().subscribe({
+    this.paymentService.getPaymentMethod().subscribe({
       next: (response : any)=>{
         this.paymentMethods = response.data
       }
@@ -55,7 +64,26 @@ export class PaymentComponent implements OnInit {
   }
 
   savePayment(){
-    console.log(this.payments.value)
+    const payments = this.paymentField.value.map((payment: any) => ({
+      saleId: this.saleId,
+      paymentMethodId: Number(payment.paymentMethodId),
+      amount: Number(payment.amount),
+      date: normalizeToUtcIsoDate(payment.date)
+    }));
+
+    this.paymentService.savePayment(payments).subscribe({
+      next: () => {
+        this.showInformation = true;
+      },
+      error: (error) => {
+        console.error('Error al guardar el pago', error);
+      }
+    });
+  }
+
+  closeInformation(e: boolean){
+    this.showInformation = e;
+    this.router.navigateByUrl('/ventas');
   }
 
 }
