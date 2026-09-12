@@ -5,7 +5,7 @@ import { SaleDetails } from './saleDetails.models';
 export interface Sale {
   id: string,
   consecutive?: string,
-  saleDate: Date,
+  saleDate: string,
   customer: Customer,
   deliveryDate: string,
   saleStatus: SaleStatus,

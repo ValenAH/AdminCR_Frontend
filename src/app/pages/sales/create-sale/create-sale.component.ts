@@ -8,6 +8,7 @@ import { ShoppingCart } from 'src/app/common/models/shoppingCart.model';
 import { SaleService } from 'src/app/services/sale.service';
 import { Sale } from 'src/app/common/models/sale.model';
 import { Router } from '@angular/router';
+import { getCurrentUtcIsoDateTime, normalizeToUtcIsoDate } from 'src/app/common/utils/date.util';
 
 @Component({
   selector: 'app-create-sale',
@@ -116,9 +117,14 @@ export class CreateSaleComponent implements OnInit {
       delete product.productName;
       delete product.productDescription;
     })
+
+    const saleDate = getCurrentUtcIsoDateTime();
+    const deliveryDate = normalizeToUtcIsoDate(this.saleForm.value.deliveryDate);
+
     let sale: Sale = {
-      saleDate: this.currentDate,
+      saleDate,
       ...this.saleForm.value,
+      deliveryDate,
       totalAmount: this.totalSale,
       saleDetails
     };

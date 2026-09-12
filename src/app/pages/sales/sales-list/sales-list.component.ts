@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Sale } from 'src/app/common/models/sale.model';
 import { SaleService } from '../../../services/sale.service';
 import { SaleStatus } from 'src/app/common/enums/saleStatus.enum';
+import { normalizeToUtcIsoDate } from 'src/app/common/utils/date.util';
 
 @Component({
   selector: 'app-sales-list',
@@ -46,12 +47,16 @@ export class SalesListComponent implements OnInit {
     }
   }
   confirmChangeStatus(sale : Sale){
-    let saleToUpdate = {
+    const saleToUpdate = {
       id: sale.id,
       consecutive: sale.consecutive,
+      saleDate: normalizeToUtcIsoDate(sale.saleDate),
       customerId: sale.customer.id,
+      deliveryDate: normalizeToUtcIsoDate(sale.deliveryDate),
+      totalAmount: sale.totalAmount,
       saleStatusId: sale.saleStatus.id
-    }
+    };
+
     this.saleService.updateSale(saleToUpdate).subscribe({
       next: ()=>{
         this.showInformation = true;

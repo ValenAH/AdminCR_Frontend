@@ -21,7 +21,15 @@ export class SaleService {
    saveSale(sale : Sale){
     return this.http.post(`${this._urlApi}Sale/SaveSale`, sale)
    }
-   updateSale(sale : {id: string, saleStatusId: number}){
+   updateSale(sale : {
+    id: string,
+    consecutive?: string,
+    saleDate?: string,
+    customerId?: number,
+    deliveryDate?: string,
+    totalAmount?: number,
+    saleStatusId: number
+   }){
     return this.http.post(`${this._urlApi}Sale/UpdateSale`, sale)
    }
    getSaleDetails(saleId : number){
