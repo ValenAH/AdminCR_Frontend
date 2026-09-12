@@ -1,4 +1,4 @@
-import { HttpEvent, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ListToken } from '@shared/constants/noTokenList';
 import { Observable } from 'rxjs';
@@ -8,24 +8,23 @@ import { Observable } from 'rxjs';
 })
 export class AuthInterceptorService {
 
-
   constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token: string = localStorage.getItem('token') || '';
+    const rejected: boolean = ListToken.BLACKLIST.some((e) => req.url.includes(e));
 
-    let token: string = localStorage.getItem('token') || "";
-    let request: HttpRequest<any> = req;
-    const rejected: boolean = ListToken.BLACKLIST.some(e => request.url.includes(e));
-    let headers = new HttpHeaders()
-    .set('Type-content','aplication/json')
-
-    if (token && !rejected) {
-      headers.set('authorization', `Bearer ${token}`)
-      request = req.clone({
-        headers
-      });
+    if (!token || rejected) {
+      return next.handle(req);
     }
 
-    return next.handle(request)
+    const authReq = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return next.handle(authReq);
   }
 }

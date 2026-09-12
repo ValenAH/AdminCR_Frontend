@@ -12,7 +12,7 @@ import { SaleService } from 'src/app/services/sale.service';
 })
 export class SaleDetailsComponent implements OnInit {
   private saleId : number;
-  public sale !: Sale;
+  public sale: Sale | null = null;
   public payments: Payment[] = [];
 
   constructor(
@@ -74,6 +74,9 @@ export class SaleDetailsComponent implements OnInit {
   }
 
   openInvoice(){
+    if (!this.sale?.id) {
+      return;
+    }
     window.open(`${environment.backend_url}Sale/${this.sale.id}`);
   }
 
