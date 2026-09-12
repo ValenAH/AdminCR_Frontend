@@ -64,6 +64,11 @@ export class PaymentComponent implements OnInit {
   }
 
   savePayment(){
+    if (this.payments.invalid) {
+      this.payments.markAllAsTouched();
+      return;
+    }
+
     const payments = this.paymentField.value.map((payment: any) => ({
       saleId: this.saleId,
       paymentMethodId: Number(payment.paymentMethodId),

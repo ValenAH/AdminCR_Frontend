@@ -22,12 +22,13 @@
             <div class="col-lg-4">
               <label for="">Método de pago</label>
               <select class="w-100 p-1" formControlName="paymentMethodId" id="">
+                <option value="" disabled selected>Seleccione</option>
                 <option [value]="paymentMethod.id" *ngFor="let paymentMethod of paymentMethods">{{paymentMethod.name}}</option>
               </select>
             </div>
             <div class="col-lg-4">
               <label for="">Monto</label>
-              <input class="w-100 p-1" formControlName="amount" type="text">
+              <input class="w-100 p-1" formControlName="amount" type="number" min="0">
             </div>
           </div>
         </div>
@@ -40,7 +41,7 @@
         </div>
 
         <div class="text-center">
-          <button class="savePayment rounded-1" type="submit" [disabled]="payments.invalid">Guardar pago</button>
+          <button class="savePayment rounded-1" type="button" (click)="savePayment()" [disabled]="payments.invalid">Guardar pago</button>
         </div>
     </form>
   </div>
