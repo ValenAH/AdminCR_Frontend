@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backend_url: 'https://localhost:7291/api/'
+  backend_url: 'https://manageyourdreams-backend.onrender.com/api/'
 };
