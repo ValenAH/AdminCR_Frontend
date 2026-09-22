@@ -93,9 +93,6 @@ export class CreateSaleComponent implements OnInit {
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
     this.totalSale = this.shoppingCartService.getTotal();
     this.totalQuantity = this.shoppingCartService.getTotalQuantity();
-    
-    if(this.shoppingCart.length== 0)
-      this.productAdded = false;
   }
   getTotal(){
     this.shoppingCartService.total$.subscribe({
