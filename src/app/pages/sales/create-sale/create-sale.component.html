@@ -91,11 +91,11 @@
             </div>
           </div>
         </div>
-        <div class="m-3" *ngIf="!productAdded">
+        <div class="m-3">
           <hr>
-          <a class="addProducts d-flex align-items-center text-decoration-none text-dark" (click)="productAdded = true">
-            <i class="bi bi-plus-circle-fill icon"></i>
-            <span class="px-2">Agregar productos</span>
+          <a class="addProducts d-flex align-items-center text-decoration-none text-dark" (click)="productAdded = !productAdded">
+            <i class="icon" [ngClass]="productAdded ? 'bi bi-dash-circle-fill' : 'bi bi-plus-circle-fill'"></i>
+            <span class="px-2">{{productAdded ? 'Ocultar productos' : 'Agregar productos'}}</span>
           </a>
         </div>
     </div>
